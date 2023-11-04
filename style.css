@@ -1,0 +1,196 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond&family=Josefin+Sans&family=Roboto&display=swap');
+:root{
+    --bgc: #333366;
+    --annbg: #B2DF8A;
+    --scrollbar: #FFA76C;
+}
+*{
+    margin: 0; padding: 0;
+    list-style: none;
+    text-decoration: none;
+}
+.header{
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    width: 100%;
+    background-color: white;
+}
+.header ul a{
+    line-height: 30px;
+    padding-left: 50px;
+    padding-right: 50px;
+    font-size: 15px;
+}
+.sidebar{
+    position: fixed;
+    left: 0;
+    top: 50px;
+    width: 230px;
+    height: 100%;
+    background: var(--bgc);
+}
+.sidebar header{
+    font-family:'EB Garamond', serif;
+    font-size: 22px;
+    color: white;
+    text-align: center;
+    line-height: 60px;
+    user-select: none;
+}
+.sidebar ul a{
+    display: block;
+    height: 100%;
+    width: 100%;
+    line-height: 50px;
+    font-size: 15px;
+    color: azure;
+    padding-left: 30px;
+    box-sizing: border-box;
+}
+.sidebar ul a i{
+    margin-right: 15px;
+}
+.content{
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    width: calc(97% - 230px);
+    height: 100%;
+    left: 230px;
+    padding: 20px 20px;
+    grid-gap: 20px;
+}
+.content .head{
+    display: flex;
+    align-items: center;
+    grid-gap: 10px;
+    margin-bottom: 15px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+}
+
+.content .classes{
+    border-radius: 15px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-basis: 600px;
+}
+.content .classes .classlist{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-gap: 15px;
+}
+.content .classes li{
+    padding: 10px;
+    width: 170px;
+    height: 150px;
+    background-color: white;
+    border-radius: 10px;
+    border-style: solid;
+    border-color: var(--bgc);
+    align-items: center;
+}
+
+.content .listeditems >div{
+    border-radius: 5px;
+    border-style: solid;
+    border-color: var(--bgc);
+    padding: 15px;
+    overflow-x: auto;
+    margin-bottom: 10px;
+    min-height: 100px;
+}
+.content .listeditems li{
+    display: none;
+}
+.content .listeditems i{
+    font-size: 15px;
+}
+.content .announcement{
+    flex-grow: 1;
+    flex-basis: 200px;
+    min-height: 100px;
+    max-height: 139px;
+    background: var(--annbg);
+}
+.content .annlist{ width: 100%;}
+.content .annlist li:nth-child(-n+3){
+    width: 225px;
+    margin-bottom: 10 px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+.content .event{
+    flex-grow: 1;
+    flex-basis: 200px;
+    max-height: 285px;
+}
+.content .eventlist{width: 100%;}
+.content .eventlist li:nth-child(-n+7){
+    width: 225px;
+    margin-bottom: 10 px;
+    background-color: slategray;
+    border-radius: 10px;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+.content .classname{
+    width: 100%;
+    font-size: 20px;
+    color: var(--bgc);
+}
+.content .class-announcement{
+    width: 100%;
+    border-radius: 2px;
+    border-style: solid;
+    border-color: var(--bgc);
+    padding: 15px;
+    overflow-x: auto;
+    margin-bottom: 10px;
+    min-height: 100px;
+}
+.classannlist .head{
+    border-color: var(--bgc);
+}
+.classannlist li{
+    width: 400px;
+    /* padding: 10px 15px; */
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+.classannlist li i{
+    margin-right: 10px;
+}
+.content .modules{
+    height: 150px;
+    width: 100%;
+    background-color: #FFA76C;
+    border-radius: 3px;
+    border-style: solid;
+    border-color: var(--bgc);
+    padding: 15px;
+    overflow-x: auto;
+    margin-bottom: 10px;
+}
+.modules .modulelist
+html{
+    font-size: 62.5%;
+    overflow-x: hidden;
+    scroll-padding-top: 5.5rem;
+    scroll-behavior: smooth;
+}
