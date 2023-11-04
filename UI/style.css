@@ -67,11 +67,24 @@
 }
 .content .head{
     display: flex;
+    justify-content: space-between;
     align-items: center;
     grid-gap: 10px;
     margin-bottom: 15px;
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
+}
+.content .head .viewbutton{
+    margin-right: 13px;
+}
+.content .viewbutton{
+    border-style: solid;
+    border-color: var(--bgc);
+    border-radius: 7px;
+    display: flex;
+    padding: 3px 10px;
+    color: var(--bgc);
+    background-color: white;
 }
 
 .content .classes{
