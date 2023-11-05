@@ -132,6 +132,7 @@
     border-radius: 10px;
     border-style: solid;
     border-color: var(--bgc);
+    display: flex;
     align-items: center;
 }
 /* homepage classes */
@@ -279,7 +280,7 @@
     align-items: center;
 }
 .annpagelist .date {
-    width: 50px;
+    width: 70px;
 }
 .annpagelist .anninfo p{
     width: 650px;
