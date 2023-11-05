@@ -13,11 +13,11 @@ function Home() {
         axios.get('http://localhost:3005/getClass')
             .then((response) => {
                 setClass(response.data);
+                console.log(response.data)
             })
             .catch((error) => {
                 console.error('Error fetching class:', error);
             });
-            console.log(clas)
     }, []);
 
     const annListStyle = {
@@ -59,9 +59,9 @@ function Home() {
                     </div>
                 </div>
                 <ul class="classlist">
-                    {clas.map((cls, index) => (
+                    {clas.map((cls, index) => ( 
                         <li key={index}>
-                            <a href="ClassPage">
+                            <a href={"ClassPage?classId="+cls.cid}>
                                 <i class="#">{/* Add your class icon here */}</i>
                                 <span class="text">
                                     <h3>{cls.name}</h3>
