@@ -59,6 +59,25 @@ app.get("/getAnnouncement", (req, res) => {
     });
 });
 
+app.get("/getClass", (req, res) => {
+    const sql = `SELECT c.name, cl.year, cl.semester
+    FROM course AS c
+    JOIN courselog AS cl ON c.cid = cl.cid;   
+    `;
+
+    db.query(sql, (err, data) => {
+        if (err) {
+            // Handle the error
+            console.error(err);
+            res.status(500).send("An error occurred while fetching data.");
+        } else {
+            // Process the query result in 'data' and send a response
+            res.json(data);
+        }
+    });
+});
+
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });

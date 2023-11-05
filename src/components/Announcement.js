@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { alignProperty } from "@mui/material/styles/cssUtils";
 
 function Announcement() {
     const [announcements, setAnnouncements] = useState([]);
@@ -30,7 +31,7 @@ function Announcement() {
 
     return (
         <div className="content">
-            <div className="title">
+            <div className="title" style={{textAlign:"left"}}>
                 <h2>Announcement</h2>
             </div>
             <div className="announcements">
@@ -41,12 +42,12 @@ function Announcement() {
                                 <div className="date"><h3>{formatDate(announcement.datePosted)}</h3></div>
                                 <div className="anninfo">
                                     <div className="anntext" style={{ textAlign: 'left', maxHeight: isExpanded(index) ? 'none' : '4em', overflow: 'hidden' }}>
-                                        <h3>{announcement.name}posted by {announcement.poster}</h3>
+                                        <h3>{announcement.name} posted by {announcement.poster}</h3>
                                         <p>
                                             {announcement.content}
                                         </p>
                                     </div>
-                                    <div className="seemorebutton" style={{ textAlign: 'right' }}>
+                                    <div className="seemorebutton" style={{ textAlign: 'center' }}>
                                         <a href="#" onClick={() => handleExpand(index)}>
                                             {isExpanded(index) ? "See less" : "See more"}
                                         </a>
