@@ -19,6 +19,7 @@
     width: 100%;
     background-color: white;
     z-index: 1;
+    border-bottom: 4px solid var(--bgc);
 }
 .header ul a{
     line-height: 30px;
@@ -55,6 +56,10 @@
 .sidebar ul a i{
     margin-right: 15px;
 }
+.sidebar ul li.active {
+    background-color: var(--bgc); /* Change this to your desired color */
+    color: blue; /* Change this to your desired text color */
+}
 .content{
     position: relative;
     display: flex;
@@ -62,8 +67,14 @@
     width: calc(97% - 230px);
     height: 100%;
     left: 230px;
-    padding: 20px 20px;
+    padding: 10px 20px;
     grid-gap: 20px;
+}
+iframe{
+    display: block;
+    border: none;
+    height: calc(100vh - 30px);
+    width: 100%;
 }
 .content .head{
     display: flex;
@@ -85,6 +96,16 @@
 }
 .content .classes .viewbutton{
     margin-right: 13px;
+}
+.content .seemorebutton{
+    border-style: solid;
+    border-color: var(--bgc);
+    border-radius: 7px;
+    display: flex;
+    padding: 3px 10px;
+    color: var(--bgc);
+    background-color: white;
+    max-width: fit-content;
 }
 .content .classes{
     border-radius: 15px;
@@ -130,8 +151,8 @@
     flex-grow: 1;
     flex-basis: 200px;
     min-height: 100px;
-    max-height: 165px;
     background: var(--annbg);
+    margin-top: 10px;
 }
 .content .annlist{ width: 100%;}
 .content .annlist li:nth-child(-n+3){
@@ -171,6 +192,14 @@
 .content .eventlist i{
     margin-right: 10px;
 }
+.title{
+    width: 100%;
+    color: var(--bgc);
+    padding-left: 10px;
+    padding-top: 5px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px;
+}
 .content .classname{
     width: 100%;
     font-size: 20px;
@@ -181,20 +210,22 @@
     border-radius: 2px;
     border-style: solid;
     border-color: var(--bgc);
-    padding: 15px;
     overflow-x: auto;
-    margin-bottom: 10px;
     min-height: 100px;
 }
-.classannlist .head{
-    border-color: var(--bgc);
+.class-announcement .head{
+    border-bottom: 2px solid var(--bgc);
+    padding: 5px 15px;
+
 }
 .classannlist li{
     width: 400px;
-    /* padding: 10px 15px; */
+    padding: 5px 10px;
     display: flex;
     align-items: center;
     margin-bottom: 5px;
+    margin-top: -5px;
+    font-size: 12px;
 }
 .classannlist li i{
     margin-right: 10px;
@@ -210,7 +241,50 @@
     overflow-x: auto;
     margin-bottom: 10px;
 }
-.modules .modulelist
+.content .announcements{
+    width: 100%;
+    padding-left: 10px;
+}
+.annpagelist li{
+    display: flex;
+    align-items: first baseline;
+}
+.annpagelist li .left{
+    width: 90%;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: var(--bgc);
+    margin-bottom: 10px;
+    min-height: 70px;
+}
+.annpagelist li .left >div{
+    padding: 30px;
+    align-items: center;
+}
+.annpagelist .anninfo{
+    height: 100%;
+    width: 100%;
+    border-left: 2px solid var(--bgc);
+    display: flex;
+    justify-content: space-between;
+}
+.annstatus i{
+    margin-left: 15px;
+    font-size: 15px;
+}
+.allcourselist li{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin-bottom: 5px;
+    padding: 5px;
+    font-size: 12px;
+}
+.allcourselist li i{
+    margin-right: 10px;
+}
 html{
     font-size: 62.5%;
     overflow-x: hidden;
