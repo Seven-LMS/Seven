@@ -3,8 +3,23 @@ import "../style/style.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGripLines, faSquareCheck, faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { faCalendar } from '@fortawesome/free-regular-svg-icons';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
 
 function Home() {
+    const [clas, setClass] = useState([]);
+
+    useEffect(() => {
+        axios.get('http://localhost:3005/getClass')
+            .then((response) => {
+                setClass(response.data);
+            })
+            .catch((error) => {
+                console.error('Error fetching class:', error);
+            });
+            console.log(clas)
+    }, []);
+
     const annListStyle = {
         width: '100%',
     };
@@ -34,27 +49,29 @@ function Home() {
     return (
         <div className="content">
             <div class="classes">
-            <div class="head">
-                <h3>Courses</h3>
-                <div class="viewbutton">
-                    <a href="CoursePickPage" class="viewallclass" >
-                        <i><FontAwesomeIcon icon={faGripLines} style={iconStyle}/></i>
-                        <span class="text">view all</span>
-                    </a>
+                <div class="head">
+                    <h3>Courses</h3>
+                    <div class="viewbutton">
+                        <a href="CoursePickPage" class="viewallclass" >
+                            <i><FontAwesomeIcon icon={faGripLines} style={iconStyle} /></i>
+                            <span class="text">view all</span>
+                        </a>
+                    </div>
                 </div>
+                <ul class="classlist">
+                    {clas.map((cls, index) => (
+                        <li key={index}>
+                            <a href="ClassPage">
+                                <i class="#">{/* Add your class icon here */}</i>
+                                <span class="text">
+                                    <h3>{cls.name}</h3>
+                                    <p>{cls.year}</p>
+                                </span>
+                            </a>
+                        </li>
+                    ))}
+                </ul>
             </div>
-            <ul class="classlist">
-                <li><a href="ClassPage"><i class="#"></i><span class="text"><h3></h3><p>Class 1</p></span></a></li>
-                <li><i class="#"></i><span class="text"><h3></h3><p>Class 2</p></span></li>
-                <li><i class="#"></i><span class="text"><h3></h3><p>Class 3</p></span></li>
-                <li><i class="#"></i><span class="text"><h3></h3><p>Class 4</p></span></li>
-                <li><i class="#"></i><span class="text"><h3></h3><p>Class 3</p></span></li>
-                <li><i class="#"></i><span class="text"><h3></h3><p>Class 4</p></span></li>
-                <li><i class="#"></i><span class="text"><h3></h3><p>Class 4</p></span></li>
-                <li><i class="#"></i><span class="text"><h3></h3><p>Class 3</p></span></li>
-                <li><i class="#"></i><span class="text"><h3></h3><p>Class 4</p></span></li>
-            </ul>
-        </div>
         <div class="listeditems">
             <div class="announcement">
                 <div class="head">
