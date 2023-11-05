@@ -192,6 +192,14 @@ iframe{
 .content .eventlist i{
     margin-right: 10px;
 }
+.title{
+    width: 100%;
+    color: var(--bgc);
+    padding-left: 10px;
+    padding-top: 5px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px;
+}
 .content .classname{
     width: 100%;
     font-size: 20px;
@@ -202,28 +210,22 @@ iframe{
     border-radius: 2px;
     border-style: solid;
     border-color: var(--bgc);
-    padding: 15px;
     overflow-x: auto;
-    margin-bottom: 10px;
     min-height: 100px;
 }
-.title{
-    width: 100%;
-    color: var(--bgc);
-    padding-left: 10px;
-    padding-top: 5px;
-    font-family: 'Roboto', sans-serif;
-    font-size: 13px;
-}
-.classannlist .head{
-    border-color: var(--bgc);
+.class-announcement .head{
+    border-bottom: 2px solid var(--bgc);
+    padding: 5px 15px;
+
 }
 .classannlist li{
     width: 400px;
-    /* padding: 10px 15px; */
+    padding: 5px 10px;
     display: flex;
     align-items: center;
     margin-bottom: 5px;
+    margin-top: -5px;
+    font-size: 12px;
 }
 .classannlist li i{
     margin-right: 10px;
@@ -271,6 +273,17 @@ iframe{
 .annstatus i{
     margin-left: 15px;
     font-size: 15px;
+}
+.allcourselist li{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin-bottom: 5px;
+    padding: 5px;
+    font-size: 12px;
+}
+.allcourselist li i{
+    margin-right: 10px;
 }
 html{
     font-size: 62.5%;
