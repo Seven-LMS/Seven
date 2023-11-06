@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=EB+Garamond&family=Josefin+Sans&family=Roboto&display=swap');
-:root{
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond&family=Josefin+Sans&family=Poppins&family=Roboto&display=swap');:root{
     --bgc: #333366;
     --annbg: #B2DF8A;
     --scrollbar: #FFA76C;
@@ -98,6 +97,7 @@
     margin-right: 13px;
 }
 .content .seemorebutton{
+    position: relative;
     border-style: solid;
     border-color: var(--bgc);
     border-radius: 7px;
@@ -224,15 +224,17 @@
     border-style: solid;
     border-color: var(--bgc);
     overflow-x: auto;
-    min-height: 100px;
+    height: fit;
+    position: relative;
+    display: flex;
+    flex-direction: column;
 }
 .class-announcement .head{
     border-bottom: 2px solid var(--bgc);
     padding: 5px 15px;
-
 }
 .classannlist li{
-    width: 400px;
+    width: 98%;
     padding: 5px 10px;
     display: flex;
     align-items: center;
@@ -243,16 +245,73 @@
 .classannlist li i{
     margin-right: 10px;
 }
-.content .modules{
-    height: 150px;
-    width: 100%;
-    background-color: #FFA76C;
-    border-radius: 3px;
-    border-style: solid;
-    border-color: var(--bgc);
-    padding: 15px;
-    overflow-x: auto;
+.class-announcement .seemorebutton{
+    text-align: right;
     margin-bottom: 10px;
+    margin-right: 10px;
+    align-self: flex-end;
+}
+.modulelist{
+    width: 100%;
+    padding: 0 0;
+}
+.modules{
+    width: 100%;
+    margin-bottom: 15px;
+}
+.modules .module-head, .modules .submodule-head {
+    margin-bottom: 5px;
+    margin-top: 5px;
+    box-shadow: 0px 0px 5px rgba(0,0,0,0.18);
+}
+.modules .module-head label, .modules .submodule-head label{
+    background-color: lightgray;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 3px;
+    position: relative
+}
+.module-head input:checked ~ label .icon i:before,
+.submodule-head input:checked ~ .icon i:before {
+    content: '\f0d7';
+    font-family: 'Font Awesome 5 Free';
+}
+
+.modules label span{
+    font-size: 13px;
+    font-weight: 500;
+}
+.modules .submodule-head label span{
+    font-size: 12px;
+    font-weight: 500;
+}
+.modules label .icon{
+    height: 15px;
+    width: 15px;
+    display: block;
+    position: relative;
+}
+.modules label .icon i{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.modules .module-head .module-content, .modules .submodule-head .module-content{
+    max-height: 0px;
+    overflow: hidden;
+    transition: all 0.4 ease;
+    padding: 0 5px;
+    margin-bottom: 5px;
+}   
+.module-head input:checked ~ .module-content,.submodule-head input:checked ~ .module-content{
+    max-height: 100vh;
+}
+.modules input{
+    display: none;
 }
 /* classpage */
 

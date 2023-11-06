@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seven</title>
     <link rel="stylesheet" href="Style.css">
-    <script src="https://kit.fontawesome.com/c9ee7a5166.js" crossorigin="anonymous"></script></head>
+    <script src="https://kit.fontawesome.com/c9ee7a5166.js" crossorigin="anonymous"></script>
+</head>
+
 <body>
     <!-- header-->
     <div class="header">
@@ -17,7 +20,7 @@
     <!--sidebar-->
     <div class="sidebar">
         <header>Welcome!</header>
-        <ul> 
+        <ul>
             <li><a href="index.html"><i class="fa-solid fa-school-flag"></i>Homepage</a></li>
             <li><a href="announcements.html"><i class="fa-solid fa-bell"></i>Announcements</a></li>
             <li><a href="chatroom.html"><i class="fa-solid fa-message"></i>Massage</a></li>
@@ -30,17 +33,87 @@
     <div class="content">
         <div class="classname">Software Engineering</div>
         <div class="class-announcement">
-            <div class="head"><h3>Announcements</h3></div>
+            <div class="head">
+                <h3>Announcements</h3>
+            </div>
             <ul class="classannlist">
-                <li class="Ann1"><i class="fa-solid fa-square-check"></i><p>subject 1</p></li>
-                <li class="Ann2"><i class="fa-solid fa-circle-exclamation"></i><p>module 1</p></li>
-                <li class="Ann2"><i class="fa-solid fa-circle-exclamation"></i><p>module 1</p></li>
-                <li class="Ann2"><i class="fa-solid fa-circle-exclamation"></i><p>module 1</p></li>
-                <li class="Ann2"><i class="fa-solid fa-circle-exclamation"></i><p>module 1</p></li>
+                <li class="Ann1"><i class="fa-solid fa-square-check"></i>
+                    <p>subject 1</p>
+                </li>
+                <li class="Ann2"><i class="fa-solid fa-circle-exclamation"></i>
+                    <p>module 1</p>
+                </li>
+                <li class="Ann2"><i class="fa-solid fa-circle-exclamation"></i>
+                    <p>module 1</p>
+                </li>
             </ul>
+            <div class="seemorebutton">
+                <a href="#" class="seemore">
+                    <i class="fa-solid fa-grip-lines"></i>
+                    <span class="text">see more</span>
+                </a>
+            </div>
         </div>
-        <div class="modules">Modules</div>
+        <ul class="modulelist">
+            <li class="modules">
+                <div class="module-head">
+                    <input type="checkbox" id="module1">
+                    <label for="module1">
+                        <span>Module name</span>
+                        <div class="icon"><i class="fa-solid fa-caret-right"></i></div>
+                    </label>
+                    <div class="module-content">
+                        <div class="submodule-head">
+                            <input type="checkbox" id="material">
+                            <label for="material">
+                                <span>Material</span>
+                                <div class="icon"><i class="fa-solid fa-caret-right"></i></div>
+                            </label>
+                            <div class="module-content">
+                                <ul class="materiallist">
+                                    <li class="materials">
+                                        <div class="submodule-head">
+                                            <input type="checkbox" id="mat1">
+                                            <label for="mat1">
+                                                <span>Material</span>
+                                                <div class="icon"><i class="fa-solid fa-caret-right"></i></div>
+                                            </label>
+                                            <div class="module-content">
+                                                <p>this where child belong</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="submodule-head">
+                            <input type="checkbox" id="assignment">
+                            <label for="assignment">
+                                <span>Assignments</span>
+                                <div class="icon"><i class="fa-solid fa-caret-right"></i></div>
+                            </label>
+                            <div class="module-content">
+                                <ul class="assignmentlist">
+                                    <li class="assignments">
+                                        <div class="submodule-head">
+                                            <input type="checkbox" id="ass1">
+                                            <label for="ass1">
+                                                <span>assignment</span>
+                                                <div class="icon"><i class="fa-solid fa-caret-right"></i></div>
+                                            </label>
+                                            <div class="module-content">
+                                                <p>this where child belong</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+            </li>
     </div>
+    </ul>
     <!--content-->
 </body>
+
 </html>
