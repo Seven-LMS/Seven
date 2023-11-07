@@ -118,9 +118,49 @@ app.get("/getAnnouncement/:classId", (req, res) => {
 
 app.get("/getModules/:classId", (req, res) => {
     const classId = req.params.classId;
-    const sql = `SELECT md.name, md.description, md.modid, md.attachmentLink, md.cid
+    const sql = `SELECT md.name, md.modid, md.cid
     FROM modules AS md
-    WHERE md.cid = ?; 
+    WHERE md.cid = ?;
+    `;
+
+    db.query(sql, [classId], (err, data) => {
+        if (err) {
+            // Handle the error
+            console.error(err);
+            res.status(500).send("An error occurred while fetching data.");
+        } else {
+            // Process the query result in 'data' and send a response
+            res.json(data);
+        }
+    });
+});
+
+app.get("/getAssignments/:classId", (req, res) => {
+    const classId = req.params.classId;
+    const sql = `SELECT md.name, md.modid, md.cid, ass.name, ass.description, ass.datePosted, ass.attachmentLink
+    FROM modules AS md
+    JOIN assignments AS ass on md.modid = ass.modid
+    WHERE md.cid = ?;
+    `;
+
+    db.query(sql, [classId], (err, data) => {
+        if (err) {
+            // Handle the error
+            console.error(err);
+            res.status(500).send("An error occurred while fetching data.");
+        } else {
+            // Process the query result in 'data' and send a response
+            res.json(data);
+        }
+    });
+});
+
+app.get("/getMaterials/:classId", (req, res) => {
+    const classId = req.params.classId;
+    const sql = `SELECT md.name, md.modid, md.cid, mat.name, mat.description, mat. datePosted, mat.attachmentLink
+    FROM modules AS md
+    JOIN materials AS mat on md.modid = mat.modid
+    WHERE md.cid = ?;
     `;
 
     db.query(sql, [classId], (err, data) => {
