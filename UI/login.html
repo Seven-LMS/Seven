@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://kit.fontawesome.com/c9ee7a5166.js" crossorigin="anonymous"></script>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body" id="form1">
+                        <div class="form-data" v-if="!submitted">
+                            <div class="form-group">
+                                <label for="email">Email or username</label>
+                                <input autocomplete="off" type="text" id="email" v-model="email" class="form-control"
+                                    :class="{ 'is-invalid': !validEmail(email) && emailBlurred }"
+                                    @blur="emailBlurred = true">
+                                <div class="invalid-feedback">A valid email is required!</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input autocomplete="off" type="password" id="password" v-model="password"
+                                    class="form-control"
+                                    :class="{ 'is-invalid': !validPassword(password) && passwordBlurred }"
+                                    @blur="passwordBlurred = true">
+                                <div class="invalid-feedback">Password must be at least 8 characters long!</div>
+                            </div>
+                            <div class="mb-3">
+                                <button @click.stop.prevent="submit" class="btn btn-dark btn-block">Login</button>
+                            </div>
+                        </div>
+                        <div class="success-data" v-else>
+                            <div class="text-center d-flex flex-column">
+                                <i class='bx bxs-badge-check'></i>
+                                <span class="text-center fs-1">You have been logged in <br> Successfully</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        .bxs-badge-check {
+            font-size: 90px;
+        }
+        .card {
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.18);
+        }
+    </style>
+    <script>
+        var app = new Vue({
+            el: '#form1',
+            data: function () {
+                return {
+                    email: "",
+                    emailBlurred: false,
+                    submitted: false,
+                    password: "",
+                    passwordBlurred: false
+                }
+            },
+
+            methods: {
+                validate: function () {
+                    this.emailBlurred = true;
+                    this.passwordBlurred = true;
+                    if (this.validEmail(this.email) && this.validPassword(this.password)) {
+                        this.submitted = true;
+                        // Redirect to HomePage after a successful login
+                        window.location.href = 'index.html'; //here direct to homepage
+                    }
+                },
+
+                validEmail: function (email) {
+                    var re = /(.+)@(.+){2,}\.(.+){2,}/;
+                    return re.test(email.toLowerCase());
+                },
+
+                validPassword: function (password) {
+                    return password.length >= 8;
+                },
+
+                submit: function () {
+                    this.validate();
+                }
+            }
+        });
+    </script>
+    <!-- Include Bootstrap JS  -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
