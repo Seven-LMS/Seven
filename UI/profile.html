@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Profile Page</title>
+    <link rel="stylesheet" href="style.css" />
+    <script
+      src="https://kit.fontawesome.com/c9ee7a5166.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <!--header-->
+    <div class="header">
+      <ul>
+        <a href="#"><i class="fa-solid fa-school-flag"></i></a>
+      </ul>
+      <ul>
+        <a href="#"><i class="fa-regular fa-user"></i></a>
+      </ul>
+    </div>
+    <!--header-->
+
+    <!--sidebar-->
+    <div class="sidebar">
+      <header>Welcome!</header>
+      <ul>
+        <li>
+          <a href="index.html"
+            ><i class="fa-solid fa-school-flag"></i>Homepage</a
+          >
+        </li>
+        <li>
+          <a href="announcements.html"
+            ><i class="fa-solid fa-bell"></i>Announcements</a
+          >
+        </li>
+        <li>
+          <a href="chatroom.html"
+            ><i class="fa-solid fa-message"></i>Messages</a
+          >
+        </li>
+        <li>
+          <a href="settings.html"
+            ><i class="fa-solid fa-gear"></i>Settings</a
+          >
+        </li>
+      </ul>
+    </div>
+    <!--sidebar-->
+
+    <!--content-->
+    <div class="content">
+      <div class="profile">
+        <div class="pfpleft">
+          <div class="pict">
+            <img
+              src="https://via.placeholder.com/70"
+              alt="Profile Picture"
+            />
+          </div>
+          <div class="pfpinfo">
+            <div class="pname" style="font-size: 14px;">
+              Student Name
+            </div>
+            <div
+              class="psid"
+              style="font-size: 12px; font-weight: 500;"
+            >
+              2021390000
+            </div>
+            <div
+              class="faculty_major"
+              style="font-size: 11px;"
+            >
+              FET - CS/IS
+            </div>
+          </div>
+        </div>
+        <button id="change-profile-picture">
+          Change Profile Picture
+        </button>
+      </div>
+      <div class="personalInfo">
+        <div class="pinfohead">
+          <h2>Personal Information</h2>
+          <button
+            type="submit"
+            id="save-button"
+          >
+            Save Changes
+          </button>
+        </div>
+        <form id="profile-form">
+          <div class="dob">
+            <div>
+              <label for="date-of-birth">
+                Date of Birth:
+              </label>
+              <input
+                type="date"
+                id="date-of-birth"
+                name="date-of-birth"
+                required
+              />
+            </div>
+          </div>
+          <div class="contactinf">
+            <div>
+              <label for="email">Email:</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                style="height: 25px;"
+              />
+            </div>
+            <div>
+              <label for="phone">
+                Phone Number:
+              </label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                required
+                style="height: 25px;"
+              />
+            </div>
+          </div>
+          <div class="address">
+            <div>
+              <label for="address">
+                Home Address:
+              </label>
+              <textarea
+                id="address"
+                name="address"
+                rows="4"
+                required
+                style="height: 60px;"
+              ></textarea>
+            </div>
+          </div>
+          <!-- <button type="submit" id="save-button">Save Changes</button> -->
+        </form>
+      </div>
+    </div>
+    <style>
+      .profile {
+        width: 70%;
+        display: flex;
+        justify-content: space-between;
+        align-items:  center;
+        margin-top: 15px;
+        background-color: aqua;
+      }
+
+      .profile .pfpleft {
+        display: flex;
+        align-items: center;
+        padding: 5px;
+      }
+
+      .profile .pfpleft .pict {
+        display: flex;
+        padding: 15px;
+        width: 70px;
+        height: 70px;
+        border-radius: 50px;
+      }
+
+      .personalInfo {
+        width: 70%;
+      }
+      .pinfohead {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .personalInfo h2 {
+        margin-bottom: 15px;
+      }
+
+      .personalInfo div {
+        margin-bottom: 15px;
+      }
+
+      label {
+        font-size: 11px;
+      }
+      .contactinf div,
+      .address div {
+        display: flex;
+        flex-direction: column;
+      }
+    </style>
+    <!--content-->
+  </body>
+</html>
