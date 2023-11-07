@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seven</title>
-    <link rel="stylesheet" href="Style.css">
-    <script src="https://kit.fontawesome.com/c9ee7a5166.js" crossorigin="anonymous"></script></head>
+    <title>Chat App</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/c9ee7a5166.js" crossorigin="anonymous"></script>
+</head>
+
 <body>
     <!--header-->
     <div class="header">
-        <ul><a href="#"><i class="fa-solid fa-school-flag"></i></a></ul>
+        <ul><a><i class="fa-solid fa-school-flag"></i></a></ul>
         <ul><a href="#"><i class="fa-regular fa-user"></i></a></ul>
     </div>
     <!--header-->
@@ -17,7 +20,7 @@
     <!--sidebar-->
     <div class="sidebar">
         <header>Welcome!</header>
-        <ul> 
+        <ul>
             <li><a href="index.html"><i class="fa-solid fa-school-flag"></i>Homepage</a></li>
             <li><a href="announcements.html"><i class="fa-solid fa-bell"></i>Announcements</a></li>
             <li><a href="chatroom.html"><i class="fa-solid fa-message"></i>Massage</a></li>
@@ -26,10 +29,232 @@
     </div>
     <!--sidebar-->
 
-    <!--content-->
     <div class="content">
-        disini chatroom
+        <div class="chat-container">
+            <div class="chat-sidebar">
+                <h2>Inbox</h2>
+                <div class="search-bar">
+                    <input type="text" id="user-search" placeholder="Search users">
+                </div>
+                <ul class="user-list">
+                    <li class="active">User 1</li>
+                    <!-- users list here -->
+                </ul>
+            </div>
+            <div class="chat-content">
+                <div class="chat-header">
+                    <h2>User's name</h2> <!--user's name displayed here-->
+                </div>
+                <div class="chat-messages">
+                    <!-- Messages will be displayed here -->
+                    <div class="message received">
+                        <div class="message-text">Hello, how are you?</div>
+                    </div>
+                    <div class="message sent">
+                        <div class="message-text">I'm doing great, thanks!</div>
+                    </div>
+                </div>
+                <div class="chat-input">
+                    <input type="text" id="message-input" placeholder="Type your message...">
+                    <button id="send-button">Send</button>
+                </div>
+            </div>
+        </div>
     </div>
-    <!--content-->
+
+    <script>
+        // JavaScript for handling messages and sending functionality
+        const messageInput = document.getElementById('message-input');
+        const sendButton = document.getElementById('send-button');
+        const chatMessages = document.querySelector('.chat-messages');
+        const userItems = document.querySelectorAll('.user-list li');
+
+        sendButton.addEventListener('click', () => {
+            const messageText = messageInput.value.trim();
+            if (messageText) {
+                const message = document.createElement('div');
+                message.className = 'message sent';
+                message.innerHTML = `
+                    <div class="message-text">${messageText}</div>
+                `;
+                chatMessages.appendChild(message);
+                messageInput.value = '';
+            }
+        });
+
+        userItems.forEach(item => {
+            item.addEventListener('click', () => {
+                userItems.forEach(user => user.classList.remove('active'));
+                item.classList.add('active');
+                // Load the chat history with the selected user
+                chatMessages.innerHTML = ''; // Clear the chat history for this example
+                // You can load the chat history from your data source here
+            });
+        });
+    </script>
+    <style>
+        .content {
+            padding: 0 0;
+            margin-right: 0px;
+            width: 82%;
+            overflow: hidden;
+        }
+
+        .chat-container {
+            display: flex;
+            flex-direction: row;
+            height: 100%;
+            width: 100%;
+            min-height: 540px;
+        }
+
+        .chat-sidebar {
+            width: 20%;
+            background-color: white;
+            padding: 20px;
+        }
+
+        .chat-sidebar h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+
+        }
+
+        .search-bar {
+            margin-bottom: 20px;
+        }
+
+        .search-bar input {
+            width: 90%;
+            margin-right: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.18);
+        }
+
+        .user-list {
+            list-style: none;
+            height: 100%;
+        }
+
+        .user-list li {
+            cursor: pointer;
+            padding: 8px;
+            font-size: 15px;
+            transition: background-color 0.2s;
+        }
+
+        .user-list li.active {
+            background-color: whitesmoke;
+        }
+
+        .chat-content {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            padding: 20px;
+            background-color: #fff;
+            border-left: 1px solid #ccc;
+        }
+
+        .chat-header {
+            display: flex;
+            justify-content: center;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #333366;
+        }
+
+        .chat-messages {
+            flex: 1;
+            max-height: 70%;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+
+        .chat-messages:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .message {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+
+        }
+
+        .message-sender {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .chat-input {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 10px;
+        }
+
+        .chat-input input {
+            width: 90%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.18);
+        }
+
+        .chat-input button {
+            margin-left: 10px;
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .chat-input button:hover {
+            background-color: #555;
+        }
+
+        /* Updated CSS for chat bubbles */
+        .message {
+            display: inline-block;
+            margin-bottom: 10px;
+            max-width: 400px;
+            display: flex;
+            padding: 5px 10px;
+            font-size: 14px;
+            line-height: 24px;
+
+        }
+
+        .message.received {
+            /* justify-content: flex-start; */
+            border-radius: 10px 10px 10px 0;
+            background-color: #f1f1f1;
+            float: left;
+            clear: both;
+        }
+
+        .message.sent {
+            /* justify-content: flex-end;
+            align-self: flex-end; */
+            background-color: #1e90ff;
+            color: white;
+            border-radius: 10px 10px 0 10px;
+            background-color: #1e90ff;
+            color: white;
+            float: right;
+            clear: both;
+        }
+    </style>
 </body>
 </html>
