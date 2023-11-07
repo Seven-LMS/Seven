@@ -1,24 +1,47 @@
 import React from 'react';
 import "../style/style.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGripLines, faSquareCheck, faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
+import { faGripLines, faSquareCheck } from '@fortawesome/free-solid-svg-icons';
 import { faCalendar } from '@fortawesome/free-regular-svg-icons';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 
-function Home() {
+function Home({userData}) {
     const [clas, setClass] = useState([]);
+    const [announcement, setAnnouncements] = useState([]);
+    const [assignment, setAssignments] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:3005/getClass')
+        axios.get('http://localhost:3005/getCourses/'+userData)
             .then((response) => {
                 setClass(response.data);
                 console.log(response.data)
+                console.log(userData)
             })
             .catch((error) => {
                 console.error('Error fetching class:', error);
             });
     }, []);
+
+    useEffect(() => {
+        axios.get('http://localhost:3005/getAnnouncement')
+            .then(res => setAnnouncements(res.data))
+            .catch(err => console.log(err));
+    }, []);
+
+    useEffect(() => {
+        axios.get('http://localhost:3005/getAssignments/')
+            .then(res => {
+                setAssignments(res.data);
+            })
+            .catch(err => console.log(err));
+    });
+
+
+    const formatDate = (datetime) => {
+        const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+        return new Date(datetime).toLocaleDateString(undefined, options);
+    };
 
     const annListStyle = {
         width: '100%',
@@ -48,22 +71,22 @@ function Home() {
 
     return (
         <div className="content">
-            <div class="classes">
-                <div class="head">
+            <div className="classes">
+                <div className="head">
                     <h3>Courses</h3>
-                    <div class="viewbutton">
-                        <a href="CoursePickPage" class="viewallclass" >
+                    <div className="viewbutton">
+                        <a href="CoursePickPage" className="viewallclass" >
                             <i><FontAwesomeIcon icon={faGripLines} style={iconStyle} /></i>
-                            <span class="text">view all</span>
+                            <span className="text">view all</span>
                         </a>
                     </div>
                 </div>
-                <ul class="classlist">
+                <ul className="classlist" style={{textAlign:"left"}}>
                     {clas.map((cls, index) => ( 
                         <li key={index}>
                             <a href={"ClassPage?classId="+cls.cid}>
-                                <i class="#">{/* Add your class icon here */}</i>
-                                <span class="text">
+                                <i className="#">{/* Add your class icon here */}</i>
+                                <span className="text">
                                     <h3>{cls.name}</h3>
                                     <p>{cls.year}</p>
                                 </span>
@@ -72,38 +95,38 @@ function Home() {
                     ))}
                 </ul>
             </div>
-        <div class="listeditems">
-            <div class="announcement">
-                <div class="head">
+            <div className="listeditems">
+                <div className="announcement">
+                    <div className="head">
                     <h3>Announcements</h3>
-                    <div class="viewbutton">
-                        <a href="AnnouncementPage" class="viewannouncements" >
-                            <i><FontAwesomeIcon icon={faGripLines} style={iconStyle}/></i>
-                            <span class="text">view all</span>
+                    <div className="viewbutton">
+                        <a href="AnnouncementPage" className="viewannouncements">
+                        <i><FontAwesomeIcon icon={faGripLines} style={iconStyle} /></i>
+                        <span className="text">view all</span>
                         </a>
                     </div>
+                    </div>
+                    <ul className="annlist" style={annListStyle}>
+                    {announcement.map((announcement, index) => (
+                        <li className={`Ann${index % 2 === 0 ? 1 : 2}`} style={listItemStyle}>
+                        <p style={paragraphStyle}>{announcement.title}</p>
+                        <i><FontAwesomeIcon icon={faSquareCheck} style={iconStyle}/></i>
+                        </li>
+                    ))}
+                    </ul>
                 </div>
-                <ul class="annlist" style={annListStyle}>
-                    <li class="Ann1" style={listItemStyle}><p style={paragraphStyle}>subject 1</p><i><FontAwesomeIcon icon={faSquareCheck} style={iconStyle}/></i></li>
-                    <li class="Ann2" style={listItemStyle}><p style={paragraphStyle}>module 1</p><i><FontAwesomeIcon icon={faSquareCheck} style={iconStyle}/></i></li>
-                    <li class="Ann2" style={listItemStyle}><p style={paragraphStyle}>module 1</p><i><FontAwesomeIcon icon={faCircleExclamation} style={iconStyle}/></i></li>
-                    <li class="Ann2" style={listItemStyle}><p style={paragraphStyle}>module 1</p><i><FontAwesomeIcon icon={faCircleExclamation} style={iconStyle}/></i></li>
-                    <li class="Ann2" style={listItemStyle}><p style={paragraphStyle}>module 1</p><i><FontAwesomeIcon icon={faCircleExclamation} style={iconStyle}/></i></li>
-                </ul>
-            </div>
-            <div class="event">
-                <div class="head"><h3>Upcoming Events</h3></div>
-                <ul class="eventlist">
-                    <li class="Ann1"><i><FontAwesomeIcon icon={faCalendar} style={iconStyle}/></i><p>subject 1</p></li>
-                    <li class="Ann2"><i><FontAwesomeIcon icon={faCalendar} style={iconStyle}/></i><p>module 1</p></li>
-                    <li class="Ann2"><i><FontAwesomeIcon icon={faCalendar} style={iconStyle}/></i><p>module 1</p></li>
-                    <li class="Ann2"><i><FontAwesomeIcon icon={faCalendar} style={iconStyle}/></i><p>module 1</p></li>
-                    <li class="Ann2"><i><FontAwesomeIcon icon={faCalendar} style={iconStyle}/></i><p>module 1</p></li>
-                    <li class="Ann2"><i><FontAwesomeIcon icon={faCalendar} style={iconStyle}/></i><p>module 1</p></li>
-                    <li class="Ann2"><i><FontAwesomeIcon icon={faCalendar} style={iconStyle}/></i><p>module 1</p></li>
-                </ul>
-            </div>
-        </div>
+                <div className="event">
+                    <div className="head"><h3>Upcoming Assignments</h3></div>
+                    <ul className="eventlist">
+                    {assignment.map((assignment, index) => (
+                        <li className={`Ann${index % 2 === 0 ? 1 : 2}`}>
+                        <i><FontAwesomeIcon icon={faCalendar} style={iconStyle} /></i>
+                        <p>{assignment.name}</p>
+                        </li>
+                    ))}
+                    </ul>
+                </div>
+                </div>
         </div>
     );
 }

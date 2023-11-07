@@ -13,7 +13,7 @@ import MessagePage from './page/MessagePage';
 import SettingPage from './page/SettingPage';
 import CoursePickPage from './page/CoursePickPage';
 import ClassPage from './page/ClassPage';
-import LoginPage from './page/LoginPage';
+import Login from './page/login'
 
 function App() {
   return (
@@ -27,7 +27,7 @@ function App() {
           <Route path='/SettingPage' element={<SettingPage/>} />
           <Route path='/CoursePickPage' element={<CoursePickPage/>} />
           <Route path='/ClassPage' element={<ClassPage/>} />
-          <Route path='/LoginPage' element={<LoginPage/>} />
+          <Route path='/LoginPage' element={<Login/>} />
         </Routes>
       </BrowserRouter>
     </div>

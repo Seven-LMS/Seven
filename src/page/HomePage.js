@@ -3,12 +3,16 @@ import Home from '../components/Home';
 import Header from '../components/Header'
 import Sidebar from '../components/Sidebar';
 
+const searchParams = new URLSearchParams(window.location.search);
+const userData = searchParams.get('userData');
+
 function HomePage(){
     return(
         <div className="App">
             <Header/>
             <Sidebar/>
-            <Home/>
+            <Home
+            userData={userData}/>
         </div>
     );
 }
