@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
+
 <body>
     <div class="container mt-5">
         <div class="row justify-content-center">
@@ -18,16 +20,17 @@
                         <div class="form-data" v-if="!submitted">
                             <div class="form-group">
                                 <label for="email">Email or username</label>
-                                <input autocomplete="off" type="text" id="email" v-model="email"
-                                       class="form-control" :class="{ 'is-invalid': !validEmail(email) && emailBlurred }"
-                                       @blur="emailBlurred = true">
+                                <input autocomplete="off" type="text" id="email" v-model="email" class="form-control"
+                                    :class="{ 'is-invalid': !validEmail(email) && emailBlurred }"
+                                    @blur="emailBlurred = true">
                                 <div class="invalid-feedback">A valid email is required!</div>
                             </div>
                             <div class="form-group">
                                 <label for="password">Password</label>
                                 <input autocomplete="off" type="password" id="password" v-model="password"
-                                       class="form-control" :class="{ 'is-invalid': !validPassword(password) && passwordBlurred }"
-                                       @blur="passwordBlurred = true">
+                                    class="form-control"
+                                    :class="{ 'is-invalid': !validPassword(password) && passwordBlurred }"
+                                    @blur="passwordBlurred = true">
                                 <div class="invalid-feedback">Password must be at least 8 characters long!</div>
                             </div>
                             <div class="mb-3">
@@ -73,6 +76,8 @@
                     this.passwordBlurred = true;
                     if (this.validEmail(this.email) && this.validPassword(this.password)) {
                         this.submitted = true;
+                        // Redirect to HomePage after a successful login
+                        window.location.href = 'index.html'; //here direct to homepage
                     }
                 },
 
@@ -91,7 +96,8 @@
             }
         });
     </script>
-    <!-- Include Bootstrap JS (optional) -->
+    <!-- Include Bootstrap JS  -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>
