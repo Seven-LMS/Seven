@@ -14,6 +14,7 @@ import SettingPage from './page/SettingPage';
 import CoursePickPage from './page/CoursePickPage';
 import ClassPage from './page/ClassPage';
 import Login from './page/login'
+import ProfilePage from './page/ProfilePage';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path='/CoursePickPage' element={<CoursePickPage/>} />
           <Route path='/ClassPage' element={<ClassPage/>} />
           <Route path='/LoginPage' element={<Login/>} />
+          <Route path='/ProfilePage' element={<ProfilePage/>} />
         </Routes>
       </BrowserRouter>
     </div>

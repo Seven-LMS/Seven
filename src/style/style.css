@@ -71,6 +71,7 @@
     height: 100%;
     left: 230px;
     padding: 10px 20px;
+    margin-left: 20px;
     grid-gap: 20px;
 }
 /* content */
