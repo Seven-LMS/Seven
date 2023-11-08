@@ -119,6 +119,26 @@ app.get("/getClass", (req, res) => {
     });
 });
 
+app.get("/getProfile/:sid", (req, res) => {
+    const classId = req.params.sid;
+    const sql = `SELECT s.name, s.email, s.phone, s.dob, s.gender, s.address, m.name
+    FROM student AS s
+    JOIN major AS m ON SUBSTR(s.sid, 5, 2) = m.mid
+    WHERE s.sid = ?;   
+    `;
+
+    db.query(sql, [sid], (err, data) => {
+        if (err) {
+            // Handle the error
+            console.error(err);
+            res.status(500).send("An error occurred while fetching data.");
+        } else {
+            // Process the query result in 'data' and send a response
+            res.json(data);
+        }
+    });
+});
+
 app.get("/getClass/:classId", (req, res) => {
     const classId = req.params.classId;
     const sql = `SELECT c.name, cl.year, cl.semester, c.cid
