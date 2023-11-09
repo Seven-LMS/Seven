@@ -1,0 +1,45 @@
+.profile {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items:  center;
+    margin-top: 15px;
+ }
+
+  .profile .pfpleft {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+  }
+
+  .profile .pfpleft .pict {
+    display: flex;
+    padding: 15px;
+    width: 70px;
+    height: 70px;
+    border-radius: 50px;
+  }
+
+  .personalInfo {
+    width: 80%;
+  }
+  .pinfohead {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .personalInfo h2 {
+    margin-bottom: 15px;
+  }
+
+  .personalInfo div {
+    margin-bottom: 15px;
+  }
+
+  label {
+    font-size: 11px;
+  }
+  .contactinf div,
+  .address div {
+    display: flex;
+    flex-direction: column;}

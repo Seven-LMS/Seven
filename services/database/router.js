@@ -22,6 +22,47 @@ app.get("/", (req, res) => {
     })
 })
 
+app.get("/getLoginInfo/:email", (req, res) => {
+    const email = req.params.email;
+
+    const sql = `SELECT sid, name, email, password FROM student WHERE email = ?`;
+
+    db.query(sql, [email], (err, data) => {
+        if (err) {
+            // Handle the error
+            console.error(err);
+            res.status(500).send("An error occurred while fetching data.");
+        } else {
+            // Process the query result in 'data' and send a response
+            res.json(data);
+        }
+    });
+});
+
+app.get("/getCourses/:sid", (req, res) => {
+    
+    const sid = req.params.sid;
+
+    const sql = `SELECT s.sid, s.name, c.name, cl.year, cl.semester, cl.cid
+    FROM course AS c
+    JOIN courselog AS cl ON c.cid = cl.cid
+    join coursetaken as ct on cl.id = ct.id
+    join student as s on ct.sid = s.sid
+    where s.sid=?;
+    `;
+
+    db.query(sql, [sid], (err, data) => {
+        if (err) {
+            // Handle the error
+            console.error(err);
+            res.status(500).send("An error occurred while fetching data.");
+        } else {
+            // Process the query result in 'data' and send a response
+            res.json(data);
+        }
+    });
+});
+
 app.get("/getCourses", (req, res) => {
     const sql = `SELECT c.name, cl.year, cl.semester
     FROM course AS c
@@ -41,10 +82,11 @@ app.get("/getCourses", (req, res) => {
 });
 
 app.get("/getAnnouncement", (req, res) => {
-    const sql = `SELECT a.poster, a.content, a.datePosted, c.name, cl.id
+    const sql = `SELECT a.poster,a. title, a.content, a.datePosted, c.name, cl.id
     FROM announcement AS a
     JOIN courselog AS cl ON a.courseFrom = cl.id
-    JOIN course AS c ON cl.cid = c.cid;    
+    JOIN course AS c ON cl.cid = c.cid
+    ORDER BY a.datePosted DESC;    
     `;
 
     db.query(sql, (err, data) => {
@@ -66,6 +108,26 @@ app.get("/getClass", (req, res) => {
     `;
 
     db.query(sql, (err, data) => {
+        if (err) {
+            // Handle the error
+            console.error(err);
+            res.status(500).send("An error occurred while fetching data.");
+        } else {
+            // Process the query result in 'data' and send a response
+            res.json(data);
+        }
+    });
+});
+
+app.get("/getProfile/:sid", (req, res) => {
+    const classId = req.params.sid;
+    const sql = `SELECT s.name, s.email, s.phone, s.dob, s.gender, s.address, m.name
+    FROM student AS s
+    JOIN major AS m ON SUBSTR(s.sid, 5, 2) = m.mid
+    WHERE s.sid = ?;   
+    `;
+
+    db.query(sql, [sid], (err, data) => {
         if (err) {
             // Handle the error
             console.error(err);
@@ -144,6 +206,23 @@ app.get("/getAssignments/:classId", (req, res) => {
     `;
 
     db.query(sql, [classId], (err, data) => {
+        if (err) {
+            // Handle the error
+            console.error(err);
+            res.status(500).send("An error occurred while fetching data.");
+        } else {
+            // Process the query result in 'data' and send a response
+            res.json(data);
+        }
+    });
+});
+
+app.get("/getAssignments", (req, res) => {
+    const sql = `SELECT name, dateDue
+    FROM assignments;   
+    `;
+
+    db.query(sql, (err, data) => {
         if (err) {
             // Handle the error
             console.error(err);
