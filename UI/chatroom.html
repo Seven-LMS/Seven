@@ -28,7 +28,6 @@
         </ul>
     </div>
     <!--sidebar-->
-
     <div class="content">
         <div class="chat-container">
             <div class="chat-sidebar">
@@ -37,7 +36,12 @@
                     <input type="text" id="user-search" placeholder="Search users">
                 </div>
                 <ul class="user-list">
-                    <li class="active">User 1</li>
+                    <li class="active">
+                        <img src="user1.jpg" class="profile-pic"> User 1
+                    </li>
+                    <li class="active">
+                        <img src="user2.jpg" class="profile-pic"> User 2
+                    </li>
                     <!-- users list here -->
                 </ul>
             </div>
@@ -61,7 +65,6 @@
             </div>
         </div>
     </div>
-
     <script>
         // JavaScript for handling messages and sending functionality
         const messageInput = document.getElementById('message-input');
@@ -93,10 +96,11 @@
         });
     </script>
     <style>
-        .content {
-            padding: 0 0;
-            margin-right: 0px;
-            width: 82%;
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
             overflow: hidden;
         }
 
@@ -105,13 +109,12 @@
             flex-direction: row;
             height: 100%;
             width: 100%;
-            min-height: 540px;
         }
 
         .chat-sidebar {
             width: 20%;
             background-color: white;
-            padding: 20px;
+            padding: 20px 20px 20px 10px;
         }
 
         .chat-sidebar h2 {
@@ -144,19 +147,30 @@
             padding: 8px;
             font-size: 15px;
             transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
         }
 
         .user-list li.active {
             background-color: whitesmoke;
         }
 
+        .profile-pic {
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        /* chat container */
         .chat-content {
+            flex: 1;
             display: flex;
             flex-direction: column;
-            flex: 1;
             padding: 20px;
             background-color: #fff;
             border-left: 1px solid #ccc;
+            overflow: auto;
+            scrollbar-width: thin;
+            scrollbar-color: transparent transparent;
         }
 
         .chat-header {
@@ -180,6 +194,7 @@
             clear: both;
         }
 
+        /* chat bubble */
         .message {
             margin-bottom: 10px;
             padding: 10px;
@@ -194,10 +209,13 @@
         }
 
         .chat-input {
+            width: calc(65% - 80px);
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding-top: 10px;
+            position: fixed;
+            bottom: 30px;
         }
 
         .chat-input input {
@@ -224,7 +242,6 @@
             background-color: #555;
         }
 
-        /* Updated CSS for chat bubbles */
         .message {
             display: inline-block;
             margin-bottom: 10px;
@@ -233,11 +250,9 @@
             padding: 5px 10px;
             font-size: 14px;
             line-height: 24px;
-
         }
 
         .message.received {
-            /* justify-content: flex-start; */
             border-radius: 10px 10px 10px 0;
             background-color: #f1f1f1;
             float: left;
@@ -255,6 +270,30 @@
             float: right;
             clear: both;
         }
+
+        /* scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            position: fixed;
+            right: 0;
+            z-index: 1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #FFA76C;
+        }
+        /* .chat-content::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chat-content::-webkit-scrollbar-thumb {
+            background-color: transparent;
+        } */
     </style>
 </body>
+
 </html>
