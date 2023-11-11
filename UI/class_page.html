@@ -24,14 +24,23 @@
             <li><a href="index.html"><i class="fa-solid fa-school-flag"></i>Homepage</a></li>
             <li><a href="announcements.html"><i class="fa-solid fa-bell"></i>Announcements</a></li>
             <li><a href="chatroom.html"><i class="fa-solid fa-message"></i>Massage</a></li>
-            <li><a href="settings.html"><i class="fa-solid fa-gear"></i>Settigns</a></li>
+            <li><a href="help_page.html"><i class="fa-solid fa-gear"></i>Help</a></li>
         </ul>
     </div>
     <!--sidebar -->
 
     <!--content-->
     <div class="content">
-        <div class="classname">Software Engineering</div>
+        <div class="classname" style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="title">
+                <h2>Software Engineering</h2>
+            </div>
+            <div class="classdescbutton">
+                <a href="classdesc.html" class="classdesc">
+                    <span class="text" style="font-size: 13px;">Description</span>
+                </a>
+            </div>
+        </div>
         <div class="class-announcement">
             <div class="head">
                 <h3>Announcements</h3>
@@ -48,11 +57,21 @@
                 </li>
             </ul>
             <div class="seemorebutton">
-                <a href="#" class="seemore">
+                <a href="announcements.html" class="seemore">
                     <i class="fa-solid fa-grip-lines"></i>
                     <span class="text">see more</span>
                 </a>
             </div>
+        </div>
+        <div class="grade">
+            <a href="stdgrade.html">
+                <div class="gradehead">
+                    <h3>Grade</h3>
+                </div>
+                <div class="gradeoutput">
+                    <h3>A</h3>
+                </div>
+            </a>
         </div>
         <ul class="modulelist">
             <li class="modules">
@@ -113,6 +132,31 @@
             </li>
     </div>
     </ul>
+    <style>
+        .grade {
+            width: 100%;
+            border-style: solid;
+            border-color: #333366;
+        }
+
+        .grade a {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 20px;
+            font-weight: 500;
+            font-size: 14;
+        }
+
+        .classdescbutton {
+            border-style: solid;
+            border-color: var(--bgc);
+            border-radius: 7px;
+            display: flex;
+            padding: 0px 10px 3px 10px;
+            color: var(--bgc);
+            background-color: white;
+        }
+    </style>
     <!--content-->
 </body>
 

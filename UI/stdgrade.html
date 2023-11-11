@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seven</title>
+    <link rel="stylesheet" href="Style.css">
+    <script src="https://kit.fontawesome.com/c9ee7a5166.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!-- header-->
+    <div class="header">
+        <ul><a href="#"><i class="fa-solid fa-school-flag"></i></a></ul>
+        <ul><a href="#"><i class="fa-regular fa-user"></i></a></ul>
+    </div>
+    <!--header-->
+
+    <!--sidebar-->
+    <div class="sidebar">
+        <header>Welcome!</header>
+        <ul>
+            <li><a href="index.html"><i class="fa-solid fa-school-flag"></i>Homepage</a></li>
+            <li><a href="announcements.html"><i class="fa-solid fa-bell"></i>Announcements</a></li>
+            <li><a href="chatroom.html"><i class="fa-solid fa-message"></i>Massage</a></li>
+            <li><a href="settings.html"><i class="fa-solid fa-gear"></i>Settigns</a></li>
+        </ul>
+    </div>
+    <!--sidebar -->
+
+    <!--content-->
+    <div class="content">
+        <div class="title">
+            <h2>Grade</h2>
+        </div>
+        <div class="grade" style="width: 75%;">
+            <div class="gradehead">
+                <div class="taskname">Name</div>
+                <div class="taskweight">Weight</div>
+                <div class="score">Score</div>
+            </div>
+            <ul class="gradelist">
+                <li class="task1">
+                    <div class="taskscore">
+                        <div class="taskname">Assignment 1</div>
+                        <div class="taskweight">xx%</div>
+                        <div class="score">xx</div>
+                    </div>
+                </li>
+                <li class="task2">
+                    <div class="taskscore">
+                        <div class="taskname">Assignment 2</div>
+                        <div class="taskweight">xx%</div>
+                        <div class="score">xx</div>
+                    </div>
+                </li>
+            </ul>
+            <div class="totals">
+                <div class="totalhead">
+                    <h3>Total</h3>
+                </div>
+                <div class="totalweight">100%</div>
+                <div class="totalscore">xx</div>
+            </div>
+            <div class="finalgrade">
+                <div class="fgradehead">
+                    <h3>Grade</h3>
+                </div>
+                <div class="gradeoutput">A</div>
+            </div>
+        </div>
+    </div>
+    <style>
+        .gradelist {
+            min-height: 250px;
+            border-style: solid;
+            border-color: #333366;
+        }
+        .gradehead{
+            display: flex;
+            justify-content: space-between;
+            border: 2px solid #333366;
+            border-bottom: none;
+            padding: 10px 10px 10px 10px;
+            font-weight: 500;
+            font-size: 13px;
+        }
+        .grade .gradelist {
+            display: flex;
+            flex-direction: column;
+            padding: 10px 10px 0px 10px;
+        }
+
+        .grade .gradelist li .taskscore {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 12px;
+        }
+        .taskweight, .score, .totalweight, .totalscore, .gradeoutput {
+            width: 20%;
+            text-align: center;
+        }
+
+        .taskname,.totalhead {
+            width: 60%;
+        }
+
+        .totals,
+        .finalgrade {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 12px;
+        }
+
+        .totals {
+            margin-bottom: 5px;
+            border-bottom: 2px solid #333366;
+        }
+
+    </style>
+    <!--content-->
+</body>
+
+</html>
