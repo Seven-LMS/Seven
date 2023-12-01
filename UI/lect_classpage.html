@@ -75,7 +75,7 @@
             </div>
             <!-- Add Announcement Link -->
             <div class="addbutton">
-                <a href="addannouncement.html" class="addannouncement">
+                <a href="add_announcement.html" class="addannouncement">
                     <i class="fa-solid fa-pen"></i>
                     <span class="text">Add announcement</span>
                 </a>
@@ -116,7 +116,8 @@
                                 <ul class="materiallist">
                                     <!-- Materials will be added here dynamically -->
                                 </ul>
-                                <button onclick="addMaterial()" style="padding: 0 5px; margin-top: 5px; margin-bottom: 5px;">+</button>
+                                <button onclick="addMaterial()"
+                                    style="padding: 0 5px; margin-top: 5px; margin-bottom: 5px;">+</button>
                             </div>
                         </div>
                         <div class="submodule-head">
@@ -129,7 +130,8 @@
                                 <ul class="assignmentlist">
                                     <!-- Assignments will be added here dynamically -->
                                 </ul>
-                                <button onclick="addAssignment()" style="padding: 0 5px;margin-top: 5px; margin-bottom: 5px;">+</button>
+                                <button onclick="addAssignment()"
+                                    style="padding: 0 5px;margin-top: 5px; margin-bottom: 5px;">+</button>
                             </div>
                         </div>
                     </div>
@@ -165,46 +167,69 @@
             background-color: white;
         }
 
+        .materiallist,
+        .assignmentlist {
+            width: 100%;
+            margin-top: 3px;
+            padding: 5px;
+            font-size: 13px;
+        }
+
+        .assignmentelement {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .assignmentelement button {
+            margin-right: 10px;
+        }
+
         /* Add any additional styles if needed */
     </style>
 
     <script>
-        // Variables to store added materials and assignments
-        let materials = [];
-        let assignments = [];
-
-        // Functions to add material and assignment dynamically
-        function addMaterial() {
-            const materialName = prompt("Enter Material Name:");
-            if (materialName) {
-                materials.push(materialName);
-                updateMaterialList();
-            }
-        }
-
-        function addAssignment() {
-            const assignmentName = prompt("Enter Assignment Name:");
-            if (assignmentName) {
-                assignments.push(assignmentName);
-                updateAssignmentList();
-            }
-        }
+        // Dummy data for materials and assignments
+        let materials = ["Material 1", "Material 2"];
+        let assignments = ["Assignment 1", "Assignment 2"];
 
         // Functions to update material and assignment lists
         function updateMaterialList() {
-            const materialList = document.querySelector(".module-content .materials .materiallist");
+            const materialList = document.querySelector(".module-content .submodule-head input[id='material'] + label + .module-content .materiallist");
             const li = document.createElement("li");
-            li.textContent = materials[materials.length - 1];
+            li.innerHTML = `<div class="materialement">
+                            <a href="#" class="material">${materials[materials.length - 1]}</a>
+                        </div>`;
             materialList.appendChild(li);
         }
 
         function updateAssignmentList() {
-            const assignmentList = document.querySelector(".module-content .assignments .assignmentlist");
+            const assignmentList = document.querySelector(".module-content .submodule-head input[id='assignment'] + label + .module-content .assignmentlist");
             const li = document.createElement("li");
-            li.textContent = assignments[assignments.length - 1];
+            li.innerHTML = `<div class="assignmentelement">
+                            <a href="#" class="assignment">${assignments[assignments.length - 1]}</a>
+                            <button class="grade">grade</button>
+                        </div>`;
             assignmentList.appendChild(li);
         }
+
+        // Functions to add material and assignment dynamically
+        function addMaterial() {
+            // Redirect to add_material.html
+            window.location.href = "add_material.html";
+        }
+
+        function addAssignment() {
+            // Redirect to add_assignment.html
+            window.location.href = "add_assignment.html";
+        }
+
+
+        // Initial population of material and assignment lists
+        updateMaterialList();
+        updateAssignmentList();
     </script>
+
+
     <!--content-->
 </body>
 

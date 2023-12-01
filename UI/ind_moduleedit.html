@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Module - Software Engineering</title>
+    <link rel="stylesheet" href="Style.css">
+    <script src="https://kit.fontawesome.com/c9ee7a5166.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!--header-->
+    <div class="header">
+        <ul><a href="#"><i class="fa-solid fa-school-flag"></i></a></ul>
+        <ul><a href="#"><i class="fa-regular fa-user"></i></a></ul>
+    </div>
+    <!--header-->
+
+    <!--sidebar-->
+    <div class="sidebar">
+        <header>Welcome!</header>
+        <ul>
+            <li><a href="index.html"><i class="fa-solid fa-school-flag"></i>Homepage</a></li>
+            <li><a href="announcements.html"><i class="fa-solid fa-bell"></i>Announcements</a></li>
+            <li><a href="chatroom.html"><i class="fa-solid fa-message"></i>Massage</a></li>
+            <li><a href="help_page.html"><i class="fa-solid fa-gear"></i>Help</a></li>
+        </ul>
+    </div>
+    <!--sidebar-->
+
+    <!--content-->
+    <div class="content">
+        <div class="title">
+            <h2>Edit Module - Software Engineering</h2>
+        </div>
+
+        <!-- Module Name Input -->
+        <label for="moduleName">Module Name:</label>
+        <input type="text" id="moduleName" value="Software Engineering">
+
+        <!-- Material List -->
+        <div class="material-list">
+            <h3>Material List<button onclick="addMaterial()" style="float: right;">
+                    <i class="fa-solid fa-plus"></i></button></h3>
+            <ul id="materialList">
+                <!-- Materials will be added here dynamically -->
+            </ul>
+        </div>
+
+        <!-- Assignment List -->
+        <div class="assignment-list">
+            <h3>Assignment List<button onclick="addAssignment()" style="float: right;">
+                    <i class="fa-solid fa-plus"></i></button></h3>
+            <ul id="assignmentList">
+                <!-- Assignments will be added here dynamically -->
+            </ul>
+        </div>
+
+        <!-- Save Button -->
+        <button onclick="saveChanges()" style="position: fixed; right: 30px; bottom: 30px;">Save Changes</button>
+    </div>
+    <!--content-->
+
+    <style>
+        .content>div {
+            width: 100%;
+        }
+
+        .content ul {
+            font-size: 12px;
+        }
+
+        .content h3 {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-size: 13px;
+        }
+
+        input,
+        button {
+            margin-top: 5px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 5px;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        a {
+            margin-top: 5px;
+            text-decoration: none;
+            color: #333;
+        }
+
+        button {
+            padding: 8px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 11.5px;
+        }
+
+        .delete-button {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 7px;
+            padding: 3px;
+            margin-right: 5px;
+        }
+    </style>
+
+    <script>
+        // Sample data for materials and assignments
+        let materials = ["Material 1", "Material 2"];
+        let assignments = ["Assignment 1", "Assignment 2"];
+
+        // Function to add material dynamically
+        function addMaterial() {
+            const materialName = prompt("Enter Material Name:");
+            if (materialName) {
+                materials.push(materialName);
+                updateMaterialList();
+            }
+        }
+
+        // Function to add assignment dynamically
+        function addAssignment() {
+            const assignmentName = prompt("Enter Assignment Name:");
+            if (assignmentName) {
+                assignments.push(assignmentName);
+                updateAssignmentList();
+            }
+        }
+
+        // Function to update material list
+        function updateMaterialList() {
+            const materialList = document.getElementById("materialList");
+            materialList.innerHTML = ""; // Clear previous list
+
+            materials.forEach((material, index) => {
+                const li = document.createElement("li");
+                li.innerHTML = `<button class="delete-button" onclick="confirmDeleteMaterial(${index})">
+                <i class="fa-solid fa-minus"></i>
+                            </button>
+                            <a href="material_page.html">${material}</a>`;
+                materialList.appendChild(li);
+            });
+        }
+
+        // Function to update assignment list
+        function updateAssignmentList() {
+            const assignmentList = document.getElementById("assignmentList");
+            assignmentList.innerHTML = ""; // Clear previous list
+
+            assignments.forEach((assignment, index) => {
+                const li = document.createElement("li");
+                li.innerHTML = `<button class="delete-button" onclick="confirmDeleteAssignment(${index})">
+                <i class="fa-solid fa-minus"></i>
+                            </button>
+                            <a href="assignment_page.html">${assignment}</a>`;
+                assignmentList.appendChild(li);
+            });
+        }
+
+        // Function to confirm material deletion
+        function confirmDeleteMaterial(index) {
+            const confirmDelete = confirm("Are you sure you want to delete this material?");
+            if (confirmDelete) {
+                deleteMaterial(index);
+            }
+        }
+
+        // Function to confirm assignment deletion
+        function confirmDeleteAssignment(index) {
+            const confirmDelete = confirm("Are you sure you want to delete this assignment?");
+            if (confirmDelete) {
+                deleteAssignment(index);
+            }
+        }
+
+        // Function to delete material
+        function deleteMaterial(index) {
+            materials.splice(index, 1);
+            updateMaterialList();
+        }
+
+        // Function to delete assignment
+        function deleteAssignment(index) {
+            assignments.splice(index, 1);
+            updateAssignmentList();
+        }
+
+        // Function to save changes (placeholder, implement your logic)
+        function saveChanges() {
+            const newModuleName = document.getElementById("moduleName").value;
+            // Implement your logic to save changes to the server/database
+            alert(`Changes saved! New Module Name: ${newModuleName}`);
+        }
+
+        // Initial population of material and assignment lists
+        updateMaterialList();
+        updateAssignmentList();
+    </script>
+</body>
+</html>
