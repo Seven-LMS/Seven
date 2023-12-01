@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seven</title>
+    <link rel="stylesheet" href="Style.css">
+    <script src="https://kit.fontawesome.com/c9ee7a5166.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!-- header-->
+    <div class="header">
+        <ul><a href="#"><i class="fa-solid fa-school-flag"></i></a></ul>
+        <ul><a href="#"><i class="fa-regular fa-user"></i></a></ul>
+    </div>
+    <!--header-->
+
+    <!--sidebar-->
+    <div class="sidebar">
+        <header>Welcome!</header>
+        <ul>
+            <li><a href="index.html"><i class="fa-solid fa-school-flag"></i>Homepage</a></li>
+            <li><a href="announcements.html"><i class="fa-solid fa-bell"></i>Announcements</a></li>
+            <li><a href="chatroom.html"><i class="fa-solid fa-message"></i>Message</a></li>
+            <li><a href="help_page.html"><i class="fa-solid fa-gear"></i>Help</a></li>
+        </ul>
+    </div>
+    <!--sidebar -->
+
+    <!--content-->
+    <div class="content">
+        <div class="classname" style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="title">
+                <h2>Software Engineering</h2>
+            </div>
+            <div class="classdescbutton">
+                <a href="classdesc.html" class="classdesc">
+                    <span class="text" style="font-size: 13px;">Description</span>
+                </a>
+            </div>
+        </div>
+        <!-- announcement -->
+        <div class="class-announcement">
+            <div class="head">
+                <h3>Announcements</h3>
+            </div>
+            <ul class="classannlist">
+                <li class="Ann1"><i class="fa-solid fa-square-check"></i>
+                    <p>subject 1</p>
+                </li>
+                <li class="Ann2"><i class="fa-solid fa-circle-exclamation"></i>
+                    <p>module 1</p>
+                </li>
+                <li class="Ann2"><i class="fa-solid fa-circle-exclamation"></i>
+                    <p>module 1</p>
+                </li>
+            </ul>
+            <div class="seemorebutton">
+                <a href="announcements.html" class="seemore">
+                    <i class="fa-solid fa-grip-lines"></i>
+                    <span class="text">see more</span>
+                </a>
+            </div>
+        </div>
+        <!-- lecture functions -->
+        <div class="buttonholder" style="display: flex; width: 100%;">
+            <!-- Add Module Link -->
+            <div class="addbutton">
+                <a href="addmodule.html" class="addmodule">
+                    <i class="fa-solid fa-pen"></i>
+                    <span class="text">Add module</span>
+                </a>
+            </div>
+            <!-- Add Announcement Link -->
+            <div class="addbutton">
+                <a href="addannouncement.html" class="addannouncement">
+                    <i class="fa-solid fa-pen"></i>
+                    <span class="text">Add announcement</span>
+                </a>
+            </div>
+            <div class="addbutton">
+                <a href="lect_grade.html" class="lectgrade">
+                    <i class="fa-solid fa-pen"></i>
+                    <span class="text">Grade Assignment</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- modules -->
+        <ul class="modulelist">
+            <li class="modules">
+                <div class="module_button" style="display: flex; justify-content: end;">
+                    <div class="editbutton">
+                        <a href="ind_moduleedit.html" class="edit">
+                            <i class="fa-solid fa-pen"></i>
+                            <span class="text">Edit</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="module-head">
+                    <input type="checkbox" id="module1">
+                    <label for="module1">
+                        <span>Module name</span>
+                        <div class="icon"><i class="fa-solid fa-caret-right"></i></div>
+                    </label>
+                    <div class="module-content">
+                        <div class="submodule-head">
+                            <input type="checkbox" id="material">
+                            <label for="material">
+                                <span>Material</span>
+                                <div class="icon"><i class="fa-solid fa-caret-right"></i></div>
+                            </label>
+                            <div class="module-content">
+                                <ul class="materiallist">
+                                    <!-- Materials will be added here dynamically -->
+                                </ul>
+                                <button onclick="addMaterial()" style="padding: 0 5px; margin-top: 5px; margin-bottom: 5px;">+</button>
+                            </div>
+                        </div>
+                        <div class="submodule-head">
+                            <input type="checkbox" id="assignment">
+                            <label for="assignment">
+                                <span>Assignments</span>
+                                <div class="icon"><i class="fa-solid fa-caret-right"></i></div>
+                            </label>
+                            <div class="module-content">
+                                <ul class="assignmentlist">
+                                    <!-- Assignments will be added here dynamically -->
+                                </ul>
+                                <button onclick="addAssignment()" style="padding: 0 5px;margin-top: 5px; margin-bottom: 5px;">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <style>
+        .editbutton,
+        .addbutton {
+            padding: 3px 10px;
+            border-style: solid;
+            border-radius: 7px;
+            border-color: #333366;
+            background-color: white;
+            margin-right: 5px;
+            width: fit-content;
+        }
+
+        .editbutton i,
+        .addbutton i {
+            margin-right: 5px;
+        }
+
+        .classdescbutton {
+            border-style: solid;
+            border-color: var(--bgc);
+            border-radius: 7px;
+            display: flex;
+            padding: 0px 10px 3px 10px;
+            color: var(--bgc);
+            background-color: white;
+        }
+
+        /* Add any additional styles if needed */
+    </style>
+
+    <script>
+        // Variables to store added materials and assignments
+        let materials = [];
+        let assignments = [];
+
+        // Functions to add material and assignment dynamically
+        function addMaterial() {
+            const materialName = prompt("Enter Material Name:");
+            if (materialName) {
+                materials.push(materialName);
+                updateMaterialList();
+            }
+        }
+
+        function addAssignment() {
+            const assignmentName = prompt("Enter Assignment Name:");
+            if (assignmentName) {
+                assignments.push(assignmentName);
+                updateAssignmentList();
+            }
+        }
+
+        // Functions to update material and assignment lists
+        function updateMaterialList() {
+            const materialList = document.querySelector(".module-content .materials .materiallist");
+            const li = document.createElement("li");
+            li.textContent = materials[materials.length - 1];
+            materialList.appendChild(li);
+        }
+
+        function updateAssignmentList() {
+            const assignmentList = document.querySelector(".module-content .assignments .assignmentlist");
+            const li = document.createElement("li");
+            li.textContent = assignments[assignments.length - 1];
+            assignmentList.appendChild(li);
+        }
+    </script>
+    <!--content-->
+</body>
+
+</html>

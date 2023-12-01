@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher's Grading Page</title>
+    <link rel="stylesheet" href="Style.css">
+    <script src="https://kit.fontawesome.com/c9ee7a5166.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!-- header-->
+    <div class="header">
+        <ul><a href="#"><i class="fa-solid fa-school-flag"></i></a></ul>
+        <ul><a href="#"><i class="fa-regular fa-user"></i></a></ul>
+    </div>
+    <!--header-->
+
+    <!--sidebar-->
+    <div class="sidebar">
+        <header>Welcome!</header>
+        <ul>
+            <li><a href="index.html"><i class="fa-solid fa-school-flag"></i>Homepage</a></li>
+            <li><a href="announcements.html"><i class="fa-solid fa-bell"></i>Announcements</a></li>
+            <li><a href="chatroom.html"><i class="fa-solid fa-message"></i>Message</a></li>
+            <li><a href="settings.html"><i class="fa-solid fa-gear"></i>Settings</a></li>
+        </ul>
+    </div>
+    <!--sidebar -->
+
+    <!--content-->
+    <div class="content">
+        <div class="title">
+            <h2>Classname</h2>
+        </div>
+
+        <!-- Assignment Dropdown -->
+        <label for="assignment" style="font-size: 14px;">Select Assignment:</label>
+        <select id="assignment">
+            <!-- Add options dynamically using JavaScript based on the parameter in the URL -->
+        </select>
+
+        <!-- Student Grading Table -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Student ID</th>
+                    <th>Student Name</th>
+                    <th>Grade</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Sample Data - Replace with dynamic data from your server -->
+                <tr>
+                    <td style="text-align: center;">001</td>
+                    <td style="text-align: center;">John Doe</td>
+                    <td style="text-align: center;"><input type="text" name="grade" style="width: 100%; border: none; background: transparent; text-align: center;"></td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">002</td>
+                    <td style="text-align: center;">Jane Smith</td>
+                    <td style="text-align: center;"><input type="text" name="grade" style="width: 100%; border: none; background: transparent; text-align: center;"></td>
+                </tr>
+                <!-- Add more rows as needed -->
+            </tbody>
+        </table>
+
+        <!-- Save Button -->
+        <div class="save-button" style="position: fixed; right: 30px; bottom: 30px;">
+            <button onclick="saveGrades()">Save</button>
+        </div>
+    </div>
+    <!--content-->
+
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 13px;
+            border-style: solid;
+            border-color: #333366;
+            background-color: #FFFFE0; /* Pale Yellow Background Color */
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: center; /* Center the content in the cells */
+        }
+
+        th {
+            border-bottom: 1px solid #333366;
+        }
+
+        .save-button {
+            margin-top: 20px;
+            text-align: right;
+        }
+
+        .save-button button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+
+    <script>
+        // Function to save grades (Replace this with your logic)
+        function saveGrades() {
+            alert("Grades saved!"); // Add your logic here to save grades to the server
+        }
+
+        // Function to get the parameter value from the URL
+        function getParameterByName(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        // Function to populate the assignment dropdown based on the parameter in the URL
+        function populateAssignmentDropdown() {
+            const assignmentDropdown = document.getElementById("assignment");
+            const assignmentParam = getParameterByName("assignment");
+
+            // If the "assignment" parameter is present, automatically select it
+            if (assignmentParam) {
+                const option = document.createElement("option");
+                option.value = assignmentParam;
+                option.text = assignmentParam;
+                assignmentDropdown.appendChild(option);
+                assignmentDropdown.value = assignmentParam;
+            } else {
+                // If no parameter, allow the lecturer to choose an assignment
+                // Add options manually or fetch dynamically based on your requirements
+                const defaultOption = document.createElement("option");
+                defaultOption.value = "assignment1";
+                defaultOption.text = "Assignment 1";
+                assignmentDropdown.appendChild(defaultOption);
+
+                const option2 = document.createElement("option");
+                option2.value = "assignment2";
+                option2.text = "Assignment 2";
+                assignmentDropdown.appendChild(option2);
+            }
+        }
+
+        // Call the function to populate the assignment dropdown on page load
+        populateAssignmentDropdown();
+    </script>
+</body>
+
+</html>
