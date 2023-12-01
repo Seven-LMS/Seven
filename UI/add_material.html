@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seven</title>
+    <link rel="stylesheet" href="Style.css">
+    <script src="https://kit.fontawesome.com/c9ee7a5166.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!--header-->
+    <div class="header">
+        <ul><a href="#"><i class="fa-solid fa-school-flag"></i></a></ul>
+        <ul><a href="#"><i class="fa-regular fa-user"></i></a></ul>
+    </div>
+    <!--header-->
+
+    <!--sidebar-->
+    <div class="sidebar">
+        <header>Welcome!</header>
+        <ul>
+            <li><a href="index.html"><i class="fa-solid fa-school-flag"></i>Homepage</a></li>
+            <li><a href="announcements.html"><i class="fa-solid fa-bell"></i>Announcements</a></li>
+            <li><a href="chatroom.html"><i class="fa-solid fa-message"></i>Massage</a></li>
+            <li><a href="help_page.html"><i class="fa-solid fa-gear"></i>Help</a></li>
+        </ul>
+    </div>
+    <!--sidebar-->
+
+    <!--content-->
+    <div class="content" style="padding-top: 20px;">
+        <div class="material-form" style="width: 100%;">
+            <h2>Classname - Add Material</h2>
+            <form id="materialForm" style="font-size: 13px; margin-top: 10px;">
+                <div class="materialname" style="align-items: center;">
+                    <label for="materialName">Material Name:</label>
+                    <input type="text" id="materialName" name="materialName" required>
+                </div>
+
+                <div class="materialdetails" style="display: flex; flex-direction: column;">
+                    <label for="materialDetails">Details:</label>
+                    <textarea id="materialDetails" name="materialDetails" required></textarea>
+                </div>
+
+                <div class="materialattachment" style="align-items: center;">
+                    <label for="attachmentFile">Attachment:</label>
+                    <input type="file" id="attachmentFile" name="attachmentFile">
+                </div>
+
+                <button type="button" onclick="postMaterial()"
+                    style="position: fixed; bottom: 30px; right: 30px;">Post</button>
+            </form>
+        </div>
+    </div>
+    <!--content-->
+
+    <style>
+        form >div{
+            margin-top: 5px;
+        }
+        .content form label {
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        .materialname input,
+        .materialdetails textarea,
+        .materialattachment input {
+            margin-left: 10px;
+            min-width: 150px;
+        }
+
+        .materialdetails textarea {
+            flex-grow: 1;
+            min-height: 250px;
+            padding: 5px;
+            overflow-y: auto;
+        }
+    </style>
+
+    <script>
+        function postMaterial() {
+            // Get values from the form
+            var materialName = document.getElementById("materialName").value;
+            var materialDetails = document.getElementById("materialDetails").value;
+            var attachmentFile = document.getElementById("attachmentFile").value; // You may need additional logic for file handling
+
+            // Save the material to the database (send to the server)
+            saveMaterialToDatabase(materialName, materialDetails, attachmentFile);
+
+            // Show the popup
+            alert("Material posted!");
+
+            // Redirect to lect_classpage.html
+            window.location.href = "lect_classpage.html";
+        }
+
+        function saveMaterialToDatabase(name, details, attachment) {
+            // Here, you can use Ajax or fetch API to send data to the server
+            // Example using fetch API
+            fetch('/save-material', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ name, details, attachment }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Handle the response if needed
+                console.log('Material saved to the database:', data);
+            })
+            .catch(error => {
+                console.error('Error saving material:', error);
+            });
+        }
+    </script>
+</body>
+</html>

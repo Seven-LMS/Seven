@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seven - Add Assignment</title>
+    <link rel="stylesheet" href="Style.css">
+    <script src="https://kit.fontawesome.com/c9ee7a5166.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!--header-->
+    <div class="header">
+        <ul><a href="#"><i class="fa-solid fa-school-flag"></i></a></ul>
+        <ul><a href="#"><i class="fa-regular fa-user"></i></a></ul>
+    </div>
+    <!--header-->
+
+    <!--sidebar-->
+    <div class="sidebar">
+        <header>Welcome!</header>
+        <ul>
+            <li><a href="index.html"><i class="fa-solid fa-school-flag"></i>Homepage</a></li>
+            <li><a href="announcements.html"><i class="fa-solid fa-bell"></i>Announcements</a></li>
+            <li><a href="chatroom.html"><i class="fa-solid fa-message"></i>Massage</a></li>
+            <li><a href="help_page.html"><i class="fa-solid fa-gear"></i>Help</a></li>
+        </ul>
+    </div>
+    <!--sidebar-->
+
+    <!--content-->
+    <div class="content" style="padding-top: 20px;">
+        <div class="assignment-form" style="width: 100%;">
+            <h2>Classname - Add Assignment</h2>
+            <form id="assignmentForm" style="font-size: 13px; margin-top: 10px;">
+                <div class="assignment-name" style="align-items: center;">
+                    <label for="assignmentName">Assignment Name:</label>
+                    <input type="text" id="assignmentName" name="assignmentName" required>
+                </div>
+
+                <div class="assignment-details" style="display: flex; flex-direction: column;">
+                    <label for="assignmentDetails">Assignment Details:</label>
+                    <textarea id="assignmentDetails" name="assignmentDetails" required></textarea>
+                </div>
+
+                <div class="file-attachment">
+                    <label for="fileAttachment">File Attachment (Optional):</label>
+                    <input type="file" id="fileAttachment" name="fileAttachment">
+                </div>
+
+                <div class="points-weight">
+                    <label for="pointsWeight">Points/Weight:</label>
+                    <input type="number" id="pointsWeight" name="pointsWeight" required>
+                </div>
+
+                <button type="button" onclick="addAssignment()" style="position: fixed; bottom: 30px; right: 30px;">Add
+                    Assignment</button>
+            </form>
+        </div>
+    </div>
+    <!--content-->
+
+    <style>
+        .content form label {
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        .assignment-name input,
+        .points-weight input {
+            margin-left: 10px;
+            min-width: 150px;
+        }
+
+        .assignment-details textarea {
+            flex-grow: 1;
+            min-height: 100px;
+            padding: 5px;
+            overflow-y: auto;
+        }
+
+        .file-attachment input {
+            margin-top: 5px;
+        }
+
+        form>div {
+            margin-top: 5px;
+        }
+    </style>
+
+    <script>
+        function addAssignment() {
+            // Get values from the form
+            var assignmentName = document.getElementById("assignmentName").value;
+            var assignmentDetails = document.getElementById("assignmentDetails").value;
+            var fileAttachment = document.getElementById("fileAttachment").value; // You may need additional handling for file attachment
+            var pointsWeight = document.getElementById("pointsWeight").value;
+
+            // Create a new assignment element
+            var assignmentElement = document.createElement("div");
+            assignmentElement.classList.add("assignment");
+            assignmentElement.innerHTML = `
+            <h3>${assignmentName}</h3>
+            <p>${assignmentDetails}</p>
+            ${fileAttachment ? `<small>File Attachment: ${fileAttachment}</small><br>` : ''}
+            <small>Points/Weight: ${pointsWeight}</small>
+        `;
+
+            // Append the new assignment to the content
+            var contentDiv = document.querySelector(".content");
+            contentDiv.appendChild(assignmentElement);
+
+            // Clear the form
+            document.getElementById("assignmentForm").reset();
+
+            // Show the popup
+            alert("Assignment added!");
+
+            // Redirect to lect_classpage.html
+            window.location.href = "lect_classpage.html";
+        }
+    </script>
+</body>
+
+</html>

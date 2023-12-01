@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seven</title>
+    <link rel="stylesheet" href="Style.css">
+    <script src="https://kit.fontawesome.com/c9ee7a5166.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!--header-->
+    <div class="header">
+        <ul><a href="#"><i class="fa-solid fa-school-flag"></i></a></ul>
+        <ul><a href="#"><i class="fa-regular fa-user"></i></a></ul>
+    </div>
+    <!--header-->
+
+    <!--sidebar-->
+    <div class="sidebar">
+        <header>Welcome!</header>
+        <ul>
+            <li><a href="index.html"><i class="fa-solid fa-school-flag"></i>Homepage</a></li>
+            <li><a href="announcements.html"><i class="fa-solid fa-bell"></i>Announcements</a></li>
+            <li><a href="chatroom.html"><i class="fa-solid fa-message"></i>Message</a></li>
+            <li><a href="help_page.html"><i class="fa-solid fa-gear"></i>Help</a></li>
+        </ul>
+    </div>
+    <!--sidebar-->
+
+    <!--content-->
+    <div class="content" style="padding-top: 20px;">
+        <div class="announcement-form" style="width: 100%;">
+            <h2>Classname - Announcement</h2>
+            <form id="announcementForm" style="font-size: 13px; margin-top: 10px;">
+                <div class="anntitle" style="align-items: center;">
+                    <label for="announcementTitle">Title:</label>
+                    <input type="text" id="announcementTitle" name="announcementTitle" required>
+                </div>
+
+                <div class="anncontent" style="display: flex; flex-direction: column;">
+                    <label for="announcementContent">Content:</label>
+                    <textarea id="announcementContent" name="announcementContent" required
+                        oninput="autoResizeTextArea(this)"></textarea>
+                </div>
+
+                <button type="button" onclick="postAnnouncement()"
+                    style="position: fixed; bottom: 30px; right: 30px;">Post</button>
+            </form>
+        </div>
+    </div>
+    <!--content-->
+
+    <style>
+        .content form label {
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        .anntitle input {
+            margin-left: 10px;
+            min-width: 150px;
+        }
+
+        .anncontent textarea {
+            flex-grow: 1;
+            min-height: 250px; /* Set a minimum height */
+            /* max-height: 250px; Set the maximum height */
+            padding: 5px;
+            overflow-y: auto; /* Add a vertical scrollbar if needed */
+        }
+    </style>
+
+    <script>
+    function postAnnouncement() {
+        // Get values from the form
+        var title = document.getElementById("announcementTitle").value;
+        var content = document.getElementById("announcementContent").value;
+
+        // Get the current time
+        var currentTime = new Date();
+        var timestamp = currentTime.toLocaleString();
+
+        // Save the announcement to the database (send to the server)
+        saveAnnouncementToDatabase(title, content, timestamp);
+
+        // Show the popup
+        alert("Announcement posted!");
+
+        // Redirect to lect_classpage.html
+        window.location.href = "lect_classpage.html";
+    }
+
+    function saveAnnouncementToDatabase(title, content, timestamp) {
+        // Here, you can use Ajax or fetch API to send data to the server
+        // Example using fetch API
+        fetch('/save-announcement', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ title, content, timestamp }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Handle the response if needed
+            console.log('Announcement saved to the database:', data);
+        })
+        .catch(error => {
+            console.error('Error saving announcement:', error);
+        });
+    }
+
+    </script>
+</body>
+
+</html>
