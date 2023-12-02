@@ -1,7 +1,6 @@
 import React from 'react';
 import Sidebar from '../components/Sidebar';
 import Header from '../components/Header'
-import ClassContent from '../components/ClassContent';
 
 const searchParams = new URLSearchParams(window.location.search);
 const classId = searchParams.get('classId');
