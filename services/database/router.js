@@ -80,6 +80,29 @@ app.get("/getCourses/:sid", (req, res) => {
     });
 });
 
+app.get("/getCoursesLecturer/:lid", (req, res) => {
+
+    const lid = req.params.lid;
+
+    const sql = `SELECT l.lid, l.name, c.name, cl.year, cl.semester, cl.cid
+    FROM course AS c
+    JOIN courselog AS cl ON c.cid = cl.cid
+    JOIN lecturer AS l ON cl.lid = l.lid
+    where l.lid=?;
+    `;
+
+    db.query(sql, [lid], (err, data) => {
+        if (err) {
+            // Handle the error
+            console.error(err);
+            res.status(500).send("An error occurred while fetching data.");
+        } else {
+            // Process the query result in 'data' and send a response
+            res.json(data);
+        }
+    });
+});
+
 app.get("/getCourses", (req, res) => {
     const sql = `SELECT c.name, cl.year, cl.semester
     FROM course AS c

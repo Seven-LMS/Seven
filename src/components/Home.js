@@ -12,16 +12,22 @@ function Home({userData}) {
     const [assignment, setAssignments] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:3005/getCourses/'+userData)
+        // Check the user type from the session
+        const userType = sessionStorage.getItem('userType');
+    
+        // Choose the API endpoint based on the user type
+        const apiEndpoint = userType === 'lecturer' ? 'getCoursesLecturer' : 'getCourses';
+    
+        axios.get(`http://localhost:3005/${apiEndpoint}/${userData}`)
             .then((response) => {
                 setClass(response.data);
-                console.log(response.data)
-                console.log(userData)
+                console.log(response.data);
+                console.log(userData);
             })
             .catch((error) => {
                 console.error('Error fetching class:', error);
             });
-    }, []);
+    }, [userData]);    
 
     useEffect(() => {
         axios.get('http://localhost:3005/getAnnouncement')
