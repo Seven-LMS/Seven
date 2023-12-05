@@ -60,7 +60,7 @@ app.get("/getCourses/:sid", (req, res) => {
     
     const sid = req.params.sid;
 
-    const sql = `SELECT s.sid, s.name, c.name, cl.year, cl.semester, cl.cid
+    const sql = `SELECT s.sid, s.name, c.name, cl.year, cl.semester, c.cid
     FROM course AS c
     JOIN courselog AS cl ON c.cid = cl.cid
     join coursetaken as ct on cl.id = ct.id
@@ -84,7 +84,7 @@ app.get("/getCoursesLecturer/:lid", (req, res) => {
 
     const lid = req.params.lid;
 
-    const sql = `SELECT l.lid, l.name, c.name, cl.year, cl.semester, cl.cid
+    const sql = `SELECT l.lid, l.name, c.name, cl.year, cl.semester, c.cid
     FROM course AS c
     JOIN courselog AS cl ON c.cid = cl.cid
     JOIN lecturer AS l ON cl.lid = l.lid
@@ -104,9 +104,32 @@ app.get("/getCoursesLecturer/:lid", (req, res) => {
 });
 
 app.get("/getCourses", (req, res) => {
-    const sql = `SELECT c.name, cl.year, cl.semester
+    const sql = `SELECT c.name, cl.year, cl.semester, c.cid
     FROM course AS c
     JOIN courselog AS cl ON c.cid = cl.cid;
+    `;
+
+    db.query(sql, (err, data) => {
+        if (err) {
+            // Handle the error
+            console.error(err);
+            res.status(500).send("An error occurred while fetching data.");
+        } else {
+            // Process the query result in 'data' and send a response
+            res.json(data);
+        }
+    });
+});
+
+app.get("/getAnnouncement/", (req, res) => {
+
+    const sql = `SELECT distinct a.poster,a. title, a.content, a.datePosted, c.name, cl.id
+    FROM announcement AS a
+    JOIN courselog AS cl ON a.courseFrom = cl.id
+    JOIN course AS c ON cl.cid = c.cid
+    join coursetaken as ct on cl.id = ct.id
+    join student as s on ct.sid = s.sid
+    ORDER BY a.datePosted DESC;    
     `;
 
     db.query(sql, (err, data) => {
@@ -208,7 +231,7 @@ app.get("/getClass/:classId", (req, res) => {
     });
 });
 
-app.get("/getAnnouncement/:classId", (req, res) => {
+app.get("/getCourseAnnouncement/:classId", (req, res) => {
     const classId = req.params.classId;
     const sql = `SELECT a.poster, a.content, a.datePosted
     FROM announcement AS a

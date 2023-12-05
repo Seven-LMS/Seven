@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSquareCheck } from '@fortawesome/free-solid-svg-icons';
 import axios from "axios";
 
-function ClassContent({ classId }) {
+function ClassContent({classId}) {
     const [announcement, setAnnouncement] = useState([]);
     const [clas, setClass] = useState([]);
     const [modules, setModules] = useState([]);
@@ -11,53 +11,55 @@ function ClassContent({ classId }) {
     const [material, setMaterials] = useState([]);
     const [expandedAllAnnouncements, setExpandedAllAnnouncements] = useState(false);
 
+    // Create a state to track the expanded state for each module
+    const [expandedModules, setExpandedModules] = useState({});
+
     useEffect(() => {
-        axios.get('http://localhost:3005/getAnnouncement/' + classId)
+        axios.get('http://localhost:3005/getCourseAnnouncement/' + classId)
             .then(res => {
                 console.log(res.data);
                 setAnnouncement(res.data);
             })
             .catch(err => console.log(err));
-    }, [classId]);
 
-    useEffect(() => {
         axios.get('http://localhost:3005/getClass/' + classId)
             .then(res => {
                 console.log(res.data);
                 setClass(res.data);
             })
             .catch(err => console.log(err));
-    }, [classId]);
 
-    useEffect(() => {
         axios.get('http://localhost:3005/getModules/' + classId)
             .then(res => {
                 console.log(res.data);
                 setModules(res.data);
             })
             .catch(err => console.log(err));
-    }, [classId]);
 
-    useEffect(() => {
         axios.get('http://localhost:3005/getAssignments/' + classId)
-            .then(res => {
-                console.log(res.data);
-                setAssignments(res.data);
-            })
-            .catch(err => console.log(err));
-    }, [classId]);
+        .then(res => {
+            console.log(res.data);
+            setAssignments(res.data);
+        })
+        .catch(err => console.log(err));
 
-    useEffect(() => {
         axios.get('http://localhost:3005/getMaterials/' + classId)
-            .then(res => {
-                console.log(res.data);
-                setMaterials(res.data);
-            })
-            .catch(err => console.log(err));
+        .then(res => {
+            console.log(res.data);
+            setMaterials(res.data);
+        })
+        .catch(err => console.log(err));
     }, [classId]);
-
-    const handleExpandAll = () => {
+    
+    const handleExpandAllAnnouncements = () => {
         setExpandedAllAnnouncements(!expandedAllAnnouncements);
+    };
+
+    const handleExpandModule = (moduleId) => {
+        setExpandedModules((prevExpanded) => ({
+            ...prevExpanded,
+            [moduleId]: !prevExpanded[moduleId],
+        }));
     };
 
     return (
@@ -79,7 +81,7 @@ function ClassContent({ classId }) {
                 </ul>
 
                 <div className="seemorebutton" style={{ textAlign: 'center' }}>
-                    <a href="#" onClick={handleExpandAll}>
+                    <a href="#" onClick={handleExpandAllAnnouncements}>
                         {expandedAllAnnouncements ? "See less" : "See more"}
                     </a>
                 </div>
@@ -97,6 +99,9 @@ function ClassContent({ classId }) {
                                 </div>
                             </label>
                             <div className="module-content">
+                                        <a href="#" onClick={() => handleExpandModule(module.modid)}>
+                                            {expandedModules[module.modid] ? "Collapse" : "Expand"}
+                                        </a>
                                 {/* Dynamic rendering of materials for this module */}
                                 <ul className="materiallist">
                                     {material.map((material) => (
