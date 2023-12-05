@@ -24,34 +24,45 @@ function Login() {
     setPasswordBlurred(true);
 
     if (validEmail(email) && validPassword(password)) {
-            console.log(email)
-            console.log(password)
-            axios.get('http://localhost:3005/getLoginInfo/'+email)
-                .then((response) => {
-                    setUserData(response.data[0]);
-                    console.log(response.data[0])
-                    const user=response.data[0];
-                    if (user.password===password){
-                        // Store user data in sessionStorage
-                        sessionStorage.setItem('userData', user.sid);
+        // Check lecturer login info
+        axios.get(`http://localhost:3005/getLecturerLoginInfo/${email}`)
+            .then((response) => {
+                const lecturer = response.data[0];
+                if (lecturer && lecturer.password === password) {
+                    // Store user data and type in sessionStorage
+                    sessionStorage.setItem('userData', lecturer.lid); // Assuming lecturer has userId
+                    sessionStorage.setItem('userType', 'lecturer');
 
-                        //window.location.href = '/HomePage?userData='+user.sid;
-                        window.location.href = '/HomePage';
-                    }
-                    else {
-                        alert("Wrong email or password");
-                    }
-                })
-                .catch((error) => {
-                    //console.error('Error fetching class:', error);
-                    alert("Wrong email or password")
-                });
-      
-      /*setSubmitted(true);
-      // Redirect to HomePage after a successful login
-      window.location.href = '/HomePage'; // replace with where the homepage is*/
+                    // Redirect to HomePage for lecturer
+                    window.location.href = '/HomePage';
+                } else {
+                    // If lecturer login fails, check student login
+                    axios.get(`http://localhost:3005/getLoginInfo/${email}`)
+                        .then((studentResponse) => {
+                            const student = studentResponse.data[0];
+                            if (student && student.password === password) {
+                                // Store student user data and type in sessionStorage
+                                sessionStorage.setItem('userData', student.sid);
+                                sessionStorage.setItem('userType', 'student');
+
+                                // Redirect to HomePage for student
+                                window.location.href = '/HomePage';
+                            } else {
+                                alert("Wrong email or password");
+                            }
+                        })
+                        .catch((studentError) => {
+                            console.error('Error fetching student login info:', studentError);
+                            alert("An error occurred while processing the login.");
+                        });
+                }
+            })
+            .catch((error) => {
+                console.error('Error fetching lecturer login info:', error);
+                alert("An error occurred while processing the login.");
+            });
     }
-  };
+};
 
   const iconStyle = {
     marginRight: '3px',

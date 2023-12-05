@@ -22,6 +22,23 @@ app.get("/", (req, res) => {
     })
 })
 
+app.get("/getLecturerLoginInfo/:email", (req, res) => {
+    const email = req.params.email;
+
+    const sql = `SELECT lid, name, email, password FROM lecturer WHERE email = ?`;
+
+    db.query(sql, [email], (err, data) => {
+        if (err) {
+            // Handle the error
+            console.error(err);
+            res.status(500).send("An error occurred while fetching data.");
+        } else {
+            // Process the query result in 'data' and send a response
+            res.json(data);
+        }
+    });
+});
+
 app.get("/getLoginInfo/:email", (req, res) => {
     const email = req.params.email;
 
