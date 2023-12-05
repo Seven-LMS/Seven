@@ -32,7 +32,11 @@ function Login() {
                     console.log(response.data[0])
                     const user=response.data[0];
                     if (user.password===password){
-                        window.location.href = '/HomePage?userData='+user.sid;
+                        // Store user data in sessionStorage
+                        sessionStorage.setItem('userData', user.sid);
+
+                        //window.location.href = '/HomePage?userData='+user.sid;
+                        window.location.href = '/HomePage';
                     }
                     else {
                         alert("Wrong email or password");

@@ -119,26 +119,6 @@ app.get("/getClass", (req, res) => {
     });
 });
 
-app.get("/getProfile/:sid", (req, res) => {
-    const classId = req.params.sid;
-    const sql = `SELECT s.name, s.email, s.phone, s.dob, s.gender, s.address, m.name
-    FROM student AS s
-    JOIN major AS m ON SUBSTR(s.sid, 5, 2) = m.mid
-    WHERE s.sid = ?;   
-    `;
-
-    db.query(sql, [sid], (err, data) => {
-        if (err) {
-            // Handle the error
-            console.error(err);
-            res.status(500).send("An error occurred while fetching data.");
-        } else {
-            // Process the query result in 'data' and send a response
-            res.json(data);
-        }
-    });
-});
-
 app.get("/getClass/:classId", (req, res) => {
     const classId = req.params.classId;
     const sql = `SELECT c.name, cl.year, cl.semester, c.cid
@@ -253,6 +233,96 @@ app.get("/getMaterials/:classId", (req, res) => {
         }
     });
 });
+
+app.get("/getProfile", (req, res) => {
+    const sql = `SELECT s.sid, s.name, m.name AS major, s.email, s.phone, s.dob, s.gender, s.picture, s.address, s.password
+    FROM student AS s
+    JOIN major AS m ON s.mid = m.mid;
+    `;
+
+    db.query(sql, (err, data) => {
+        if (err) {
+            // Handle the error
+            console.error(err);
+            res.status(500).send("An error occurred while fetching data.");
+        } else {
+            // Process the query result in 'data' and send a response
+            res.json(data);
+        }
+    });
+});
+
+app.get("/getProfile/:sid", (req, res) => {
+    
+    const sid = req.params.sid;
+
+    const sql = `SELECT s.sid, s.name, m.name AS major, s.email, s.phone, s.dob, s.gender, s.picture, s.address, s.password
+    FROM student AS s
+    JOIN major AS m ON s.mid = m.mid
+    WHERE s.sid = ?;
+    `;
+
+    db.query(sql, [sid], (err, data) => {
+        if (err) {
+            // Handle the error
+            console.error(err);
+            res.status(500).send("An error occurred while fetching data.");
+        } else {
+            // Process the query result in 'data' and send a response
+            res.json(data);
+        }
+    });
+});
+
+app.put('/updateProfile/:userId', (req, res) => {
+    const userId = req.params.userId;
+    const updatedData = req.body;
+    console.log('Received data for updating profile:', updatedData); // Log the received data
+  
+    const sql = 'UPDATE student SET ? WHERE sid = ?';
+  
+    db.query(sql, [updatedData, userId], (err, result) => {
+      if (err) {
+        console.error('Error updating profile data:', err);
+        return res.status(500).json({ error: 'Internal Server Error' });
+      }
+  
+      return res.status(200).json({ message: 'Profile data updated successfully' });
+    });
+  });
+  
+
+// const multer = require('multer');
+// const path = require('path');
+
+// // Set up Multer for handling file uploads
+// const storage = multer.diskStorage({
+//     destination: (req, file, cb) => {
+//       cb(null, 'D:\\xampp\\htdocs\\profilepict'); // Correctly escape the backslashes
+//     },
+//     filename: (req, file, cb) => {
+//       const ext = path.extname(file.originalname);
+//       cb(null, 'profile_picture_' + Date.now() + ext);
+//     },
+//   });
+  
+//   const upload = multer({ storage });
+  
+//   // API endpoint to handle file upload (profile picture)
+//   app.post('/uploadPicture/:userId', upload.single('picture'), (req, res) => {
+//     const userId = req.params.userId;
+//     const pictureLocation = req.file.filename; // Use filename instead of path
+  
+//     const sql = 'UPDATE student SET picture = ? WHERE sid = ?'; // Correct the table name to 'student'
+//     db.query(sql, [pictureLocation, userId], (err, result) => {
+//       if (err) {
+//         console.error('Error updating profile picture:', err);
+//         return res.status(500).json({ error: 'Internal Server Error' });
+//       }
+  
+//       return res.status(200).json({ message: 'Profile picture updated successfully' });
+//     });
+//   });  
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

@@ -7,8 +7,20 @@ import { faUser } from '@fortawesome/free-regular-svg-icons';
 function Header() {
     return (
         <div className="header">
-            <ul><a href=""><FontAwesomeIcon icon={faSchoolFlag}/></a></ul>
-            <ul><a href=""><FontAwesomeIcon icon={faUser}/></a></ul>
+            <ul>
+                <a href="HomePage">
+                    <i>
+                        <FontAwesomeIcon icon={faSchoolFlag}/>
+                    </i>
+                </a>
+            </ul>
+            <ul>
+                <a href="ProfilePage">
+                    <i>
+                    <FontAwesomeIcon icon={faUser}/>
+                    </i>
+                </a>
+            </ul>
         </div>
     );
 }
