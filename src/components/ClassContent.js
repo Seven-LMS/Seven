@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSquareCheck } from '@fortawesome/free-solid-svg-icons';
+import { faSquareCheck, faPen } from '@fortawesome/free-solid-svg-icons';
 import axios from "axios";
+import "../style/style.css";
 
 function ClassContent({classId}) {
     const [announcement, setAnnouncement] = useState([]);
@@ -10,9 +11,6 @@ function ClassContent({classId}) {
     const [assignment, setAssignments] = useState([]);
     const [material, setMaterials] = useState([]);
     const [expandedAllAnnouncements, setExpandedAllAnnouncements] = useState(false);
-
-    // Create a state to track the expanded state for each module
-    const [expandedModules, setExpandedModules] = useState({});
 
     useEffect(() => {
         axios.get('http://localhost:3005/getCourseAnnouncement/' + classId)
@@ -54,19 +52,23 @@ function ClassContent({classId}) {
     const handleExpandAllAnnouncements = () => {
         setExpandedAllAnnouncements(!expandedAllAnnouncements);
     };
-
-    const handleExpandModule = (moduleId) => {
-        setExpandedModules((prevExpanded) => ({
-            ...prevExpanded,
-            [moduleId]: !prevExpanded[moduleId],
-        }));
-    };
+    
+    const addMaterial = () => {
+        // Logic to handle adding material
+        // For example, you can redirect to another page
+        window.location.href = "add_material.html";
+      };      
 
     return (
         <div className="content">
             {clas.length > 0 ? (
                 <div className="classname">{clas[0].name}</div>
             ) : null}
+            <div class="classdescbutton">
+                <a href="classdesc.html" class="classdesc">
+                    <span class="text" style={{fontSize:'13px'}}>Description</span>
+                </a>
+            </div>
             <div className="class-announcement">
                 <div className="head">
                     <h3>Announcements</h3>
@@ -87,9 +89,38 @@ function ClassContent({classId}) {
                 </div>
             </div>
 
+            <div class="buttonholder" style={{display: 'flex', width: '100%'}}>
+                <div class="addbutton">
+                    <a href="addmodule.html" class="addmodule">
+                     <i class="fa-solid fa-pen"><FontAwesomeIcon icon={faPen} /></i>
+                        <span class="text">Add module</span>
+                    </a>
+                </div>
+                <div class="addbutton">
+                    <a href="add_announcement.html" class="addannouncement">
+                        <i class="fa-solid fa-pen"><FontAwesomeIcon icon={faPen} /></i>
+                        <span class="text">Add announcement</span>
+                    </a>
+                </div>
+                <div class="addbutton">
+                    <a href="/GradePage" class="lectgrade">
+                     <i class="fa-solid fa-pen"><FontAwesomeIcon icon={faPen} /></i>
+                        <span class="text">Grade Assignment</span>
+                    </a>
+                </div>
+            </div>
+
             <ul className="modulelist">
                 {modules.map((module) => (
                     <li className="modules" key={module.modid}>
+                        <div class="module_button" style={{ display: 'flex', justifyContent:'end' }}>
+                            <div class="editbutton">
+                                <a href="ind_moduleedit.html" class="edit">
+                                    <i class="fa-solid fa-pen"><FontAwesomeIcon icon={faPen} /></i>
+                                    <span class="text">Edit</span>
+                                </a>
+                            </div>
+                        </div>
                         <div className="module-head">
                             <input type="checkbox" id={`module${module.modid}`} />
                             <label htmlFor={`module${module.modid}`}>
@@ -99,9 +130,6 @@ function ClassContent({classId}) {
                                 </div>
                             </label>
                             <div className="module-content">
-                                        <a href="#" onClick={() => handleExpandModule(module.modid)}>
-                                            {expandedModules[module.modid] ? "Collapse" : "Expand"}
-                                        </a>
                                 {/* Dynamic rendering of materials for this module */}
                                 <ul className="materiallist">
                                     {material.map((material) => (
@@ -122,6 +150,7 @@ function ClassContent({classId}) {
                                         </li>
                                         )
                                     ))}
+                                    <button onclick="addMaterial()" style={{padding: '0 5px', marginTop: '5px', marginBottom: '5px'}}>+</button>
                                 </ul>
                                 {/* Dynamic rendering of assignments for this module */}
                                 <ul className="assignmentlist">
