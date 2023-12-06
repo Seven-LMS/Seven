@@ -1,15 +1,27 @@
 import React, { useState, useEffect } from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSquareCheck, faPen } from '@fortawesome/free-solid-svg-icons';
 import axios from "axios";
-import "../style/style.css";
+import "../style/gradestyle.css";
 
-function Grade({classId}) {
-    const saveGrades = () => {
-        // Logic to handle adding material
-        // For example, you can redirect to another page
-        window.location.href = "add_material.html";
-      };  
+function Grade() {
+  const [students, setStudents] = useState([]);
+
+  useEffect(() => {
+    // Fetch student data from the backend endpoint
+    axios.get('http://localhost:3005/getAllGrades')
+      .then(response => {
+        console.log(response.data);
+        setStudents(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching students:', error);
+      });
+  }, []); // Empty dependency array ensures the effect runs once on mount
+
+  const saveGrades = () => {
+    // Logic to handle saving grades
+    // For example, you can send a request to the server to save the grades
+    console.log("Grades saved:", students);
+  };
 
   return (
     <div className="title">
@@ -27,20 +39,33 @@ function Grade({classId}) {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td style={{ textAlign: "center" }}>001</td>
-            <td style={{ textAlign: "center" }}>John Doe</td>
-            <td style={{ textAlign: "center" }}>
-              <input type="text" name="grade" style={{ width: "100%", border: "none", background: "transparent", textAlign: "center" }} />
-            </td>
-          </tr>
-          <tr>
-            <td style={{ textAlign: "center" }}>002</td>
-            <td style={{ textAlign: "center" }}>Jane Smith</td>
-            <td style={{ textAlign: "center" }}>
-              <input type="text" name="grade" style={{ width: "100%", border: "none", background: "transparent", textAlign: "center" }} />
-            </td>
-          </tr>
+          {students.map((student) => (
+            <tr key={student.sid}>
+              <td style={{ textAlign: "center" }}>{student.sid}</td>
+              <td style={{ textAlign: "center" }}>{student.name}</td>
+              <td style={{ textAlign: "center" }}>
+                <input
+                  type="text"
+                  name={`grade-${student.sid}`}
+                  value={student.grade}
+                  onChange={(e) => {
+                    const updatedStudents = students.map((s) =>
+                      s.id === student.sid
+                        ? { ...s, grade: e.target.value }
+                        : s
+                    );
+                    setStudents(updatedStudents);
+                  }}
+                  style={{
+                    width: "100%",
+                    border: "none",
+                    background: "transparent",
+                    textAlign: "center",
+                  }}
+                />
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
 

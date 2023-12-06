@@ -269,6 +269,23 @@ app.get("/getModules/:classId", (req, res) => {
     });
 });
 
+app.get("/getAllGrades", (req, res) => {
+    const sql = `SELECT g.grade, s.name, s.sid
+    from grade as g
+    join student as s on g.sid = s.sid;`;
+
+    db.query(sql,(err, data) => {
+        if (err) {
+            //Handle the error
+            console.error(err);
+            res.status(500).send("An error occured while fetching data.");
+        } else {
+            //Process the query result in 'data' and send a response
+            res.json(data);
+        }
+    });
+});
+
 app.get("/getAssignments/:classId", (req, res) => {
     const classId = req.params.classId;
     const sql = `SELECT md.name, md.modid, md.cid, ass.name, ass.description, ass.datePosted, ass.attachmentLink
