@@ -381,3 +381,47 @@ html{
     scroll-padding-top: 5.5rem;
     scroll-behavior: smooth;
 }
+
+/* Class Content*/
+.editbutton,
+        .addbutton {
+            padding: 3px 10px;
+            border-style: solid;
+            border-radius: 7px;
+            border-color: #333366;
+            background-color: white;
+            margin-right: 5px;
+            width: fit-content;
+        }
+
+        .editbutton i,
+        .addbutton i {
+            margin-right: 5px;
+        }
+
+        .classdescbutton {
+            border-style: solid;
+            border-color: var(--bgc);
+            border-radius: 7px;
+            display: flex;
+            padding: 0px 10px 3px 10px;
+            color: var(--bgc);
+            background-color: white;
+        }
+
+        .materiallist,
+        .assignmentlist {
+            width: 100%;
+            margin-top: 3px;
+            padding: 5px;
+            font-size: 13px;
+        }
+
+        .assignmentelement {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .assignmentelement button {
+            margin-right: 10px;
+        }

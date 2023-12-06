@@ -10,32 +10,42 @@ function Home({userData}) {
     const [clas, setClass] = useState([]);
     const [announcement, setAnnouncements] = useState([]);
     const [assignment, setAssignments] = useState([]);
+    const [userType, setUserType] = useState('');
 
     useEffect(() => {
-        axios.get('http://localhost:3005/getCourses/'+userData)
+        // Fetch user type from the session
+        const storedUserType = sessionStorage.getItem('userType');
+        setUserType(storedUserType);
+
+        // Fetch courses based on user type
+        const apiEndpointCourse = storedUserType === 'lecturer' ? 'getCoursesLecturer' : 'getCourses';
+
+        axios.get(`http://localhost:3005/${apiEndpointCourse}/${userData}`)
             .then((response) => {
                 setClass(response.data);
-                console.log(response.data)
-                console.log(userData)
+                console.log(response.data);
+                console.log(userData);
             })
             .catch((error) => {
                 console.error('Error fetching class:', error);
             });
-    }, []);
 
-    useEffect(() => {
-        axios.get('http://localhost:3005/getAnnouncement')
+        // Fetch announcements
+        const apiEndpointAnnounce = storedUserType === 'lecturer' ? 'getLecturerAnnouncement' : 'getAnnouncement';
+
+        axios.get(`http://localhost:3005/${apiEndpointAnnounce}/${userData}`)
             .then(res => setAnnouncements(res.data))
             .catch(err => console.log(err));
-    }, []);
 
-    useEffect(() => {
-        axios.get('http://localhost:3005/getAssignments/')
-            .then(res => {
-                setAssignments(res.data);
-            })
-            .catch(err => console.log(err));
-    });
+        // Fetch assignments only if the user is not a lecturer
+        if (storedUserType !== 'lecturer') {
+            axios.get('http://localhost:3005/getAssignments/')
+                .then(res => {
+                    setAssignments(res.data);
+                })
+                .catch(err => console.log(err));
+        }
+    }, [userData]);
 
 
     const formatDate = (datetime) => {
@@ -115,6 +125,7 @@ function Home({userData}) {
                     ))}
                     </ul>
                 </div>
+                {userType !== 'lecturer' && (
                 <div className="event">
                     <div className="head"><h3>Upcoming Assignments</h3></div>
                     <ul className="eventlist">
@@ -125,7 +136,7 @@ function Home({userData}) {
                         </li>
                     ))}
                     </ul>
-                </div>
+                </div>)}
                 </div>
         </div>
     );

@@ -4,7 +4,8 @@ import Header from '../components/Header'
 import Sidebar from '../components/Sidebar';
 
 const searchParams = new URLSearchParams(window.location.search);
-const userData = searchParams.get('userData');
+//const userData = searchParams.get('userData');
+const userData = sessionStorage.getItem('userData');
 
 function HomePage(){
     return(

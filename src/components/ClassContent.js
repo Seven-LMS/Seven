@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSquareCheck } from '@fortawesome/free-solid-svg-icons';
+import { faSquareCheck, faPen } from '@fortawesome/free-solid-svg-icons';
 import axios from "axios";
+import "../style/style.css";
 
-function ClassContent({ classId }) {
+function ClassContent({classId}) {
     const [announcement, setAnnouncement] = useState([]);
     const [clas, setClass] = useState([]);
     const [modules, setModules] = useState([]);
@@ -12,59 +13,62 @@ function ClassContent({ classId }) {
     const [expandedAllAnnouncements, setExpandedAllAnnouncements] = useState(false);
 
     useEffect(() => {
-        axios.get('http://localhost:3005/getAnnouncement/' + classId)
+        axios.get('http://localhost:3005/getCourseAnnouncement/' + classId)
             .then(res => {
                 console.log(res.data);
                 setAnnouncement(res.data);
             })
             .catch(err => console.log(err));
-    }, [classId]);
 
-    useEffect(() => {
         axios.get('http://localhost:3005/getClass/' + classId)
             .then(res => {
                 console.log(res.data);
                 setClass(res.data);
             })
             .catch(err => console.log(err));
-    }, [classId]);
 
-    useEffect(() => {
         axios.get('http://localhost:3005/getModules/' + classId)
             .then(res => {
                 console.log(res.data);
                 setModules(res.data);
             })
             .catch(err => console.log(err));
-    }, [classId]);
 
-    useEffect(() => {
         axios.get('http://localhost:3005/getAssignments/' + classId)
-            .then(res => {
-                console.log(res.data);
-                setAssignments(res.data);
-            })
-            .catch(err => console.log(err));
-    }, [classId]);
+        .then(res => {
+            console.log(res.data);
+            setAssignments(res.data);
+        })
+        .catch(err => console.log(err));
 
-    useEffect(() => {
         axios.get('http://localhost:3005/getMaterials/' + classId)
-            .then(res => {
-                console.log(res.data);
-                setMaterials(res.data);
-            })
-            .catch(err => console.log(err));
+        .then(res => {
+            console.log(res.data);
+            setMaterials(res.data);
+        })
+        .catch(err => console.log(err));
     }, [classId]);
-
-    const handleExpandAll = () => {
+    
+    const handleExpandAllAnnouncements = () => {
         setExpandedAllAnnouncements(!expandedAllAnnouncements);
     };
+    
+    const addMaterial = () => {
+        // Logic to handle adding material
+        // For example, you can redirect to another page
+        window.location.href = "add_material.html";
+      };      
 
     return (
         <div className="content">
             {clas.length > 0 ? (
                 <div className="classname">{clas[0].name}</div>
             ) : null}
+            <div class="classdescbutton">
+                <a href="classdesc.html" class="classdesc">
+                    <span class="text" style={{fontSize:'13px'}}>Description</span>
+                </a>
+            </div>
             <div className="class-announcement">
                 <div className="head">
                     <h3>Announcements</h3>
@@ -79,8 +83,29 @@ function ClassContent({ classId }) {
                 </ul>
 
                 <div className="seemorebutton" style={{ textAlign: 'center' }}>
-                    <a href="#" onClick={handleExpandAll}>
+                    <a href="#" onClick={handleExpandAllAnnouncements}>
                         {expandedAllAnnouncements ? "See less" : "See more"}
+                    </a>
+                </div>
+            </div>
+
+            <div class="buttonholder" style={{display: 'flex', width: '100%'}}>
+                <div class="addbutton">
+                    <a href="addmodule.html" class="addmodule">
+                     <i class="fa-solid fa-pen"><FontAwesomeIcon icon={faPen} /></i>
+                        <span class="text">Add module</span>
+                    </a>
+                </div>
+                <div class="addbutton">
+                    <a href="add_announcement.html" class="addannouncement">
+                        <i class="fa-solid fa-pen"><FontAwesomeIcon icon={faPen} /></i>
+                        <span class="text">Add announcement</span>
+                    </a>
+                </div>
+                <div class="addbutton">
+                    <a href="/GradePage" class="lectgrade">
+                     <i class="fa-solid fa-pen"><FontAwesomeIcon icon={faPen} /></i>
+                        <span class="text">Grade Assignment</span>
                     </a>
                 </div>
             </div>
@@ -88,6 +113,14 @@ function ClassContent({ classId }) {
             <ul className="modulelist">
                 {modules.map((module) => (
                     <li className="modules" key={module.modid}>
+                        <div class="module_button" style={{ display: 'flex', justifyContent:'end' }}>
+                            <div class="editbutton">
+                                <a href="ind_moduleedit.html" class="edit">
+                                    <i class="fa-solid fa-pen"><FontAwesomeIcon icon={faPen} /></i>
+                                    <span class="text">Edit</span>
+                                </a>
+                            </div>
+                        </div>
                         <div className="module-head">
                             <input type="checkbox" id={`module${module.modid}`} />
                             <label htmlFor={`module${module.modid}`}>
@@ -117,6 +150,7 @@ function ClassContent({ classId }) {
                                         </li>
                                         )
                                     ))}
+                                    <button onclick="addMaterial()" style={{padding: '0 5px', marginTop: '5px', marginBottom: '5px'}}>+</button>
                                 </ul>
                                 {/* Dynamic rendering of assignments for this module */}
                                 <ul className="assignmentlist">

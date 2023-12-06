@@ -15,6 +15,7 @@ import CoursePickPage from './page/CoursePickPage';
 import ClassPage from './page/ClassPage';
 import Login from './page/login'
 import ProfilePage from './page/ProfilePage';
+import GradePage from './page/GradePage';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path='/ClassPage' element={<ClassPage/>} />
           <Route path='/LoginPage' element={<Login/>} />
           <Route path='/ProfilePage' element={<ProfilePage/>} />
+          <Route path='/GradePage' element={<GradePage/>}/>
         </Routes>
       </BrowserRouter>
     </div>
