@@ -57,10 +57,10 @@ function Sidebar() {
                     </a>
                 </li>
                 <li>
-                    <a href="SettingPage" style={listLinkStyle}>
+                    <a href="HelpPage" style={listLinkStyle}>
                         <i>
                             <FontAwesomeIcon icon={faGear} style={iconStyle} />
-                        </i>Settings
+                        </i>Help
                     </a>
                 </li>
             </ul>

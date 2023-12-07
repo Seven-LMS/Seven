@@ -269,10 +269,14 @@ app.get("/getModules/:classId", (req, res) => {
     });
 });
 
-app.get("/getAllGrades", (req, res) => {
-    const sql = `SELECT g.grade, s.name, s.sid
-    from grade as g
-    join student as s on g.sid = s.sid;`;
+app.get("/getAllGrades/:classId", (req, res) => {
+    const classId = req.params.classId;
+    const assId = req.params.assId;
+
+        const sql = `SELECT g.grade, s.name, s.sid
+        from grade as g
+        join student as s on g.sid = s.sid
+        WHERE g.assid = ?;`;
 
     db.query(sql,(err, data) => {
         if (err) {
@@ -288,7 +292,7 @@ app.get("/getAllGrades", (req, res) => {
 
 app.get("/getAssignments/:classId", (req, res) => {
     const classId = req.params.classId;
-    const sql = `SELECT md.name, md.modid, md.cid, ass.name, ass.description, ass.datePosted, ass.attachmentLink
+    const sql = `SELECT md.name, md.modid, md.cid, ass.name, ass.description, ass.datePosted, ass.attachmentLink, ass.assid
     FROM modules AS md
     JOIN assignments AS ass on md.modid = ass.modid
     WHERE md.cid = ?;
@@ -325,7 +329,7 @@ app.get("/getAssignments", (req, res) => {
 
 app.get("/getMaterials/:classId", (req, res) => {
     const classId = req.params.classId;
-    const sql = `SELECT md.name, md.modid, md.cid, mat.name, mat.description, mat. datePosted, mat.attachmentLink
+    const sql = `SELECT md.name, md.modid, md.cid, mat.name, mat.description, mat. datePosted, mat.attachmentLink, mat.matid
     FROM modules AS md
     JOIN materials AS mat on md.modid = mat.modid
     WHERE md.cid = ?;
@@ -400,6 +404,27 @@ app.put('/updateProfile/:userId', (req, res) => {
     });
   });
   
+  app.get("/getAddAssigment/:classId", (req, res) => {
+    
+    const classId = req.params.classId;
+
+    const sql = `SELECT ass.assid, ass.name, ass.modid
+    from assignments as ass
+    JOIN modules AS md on ass.modid = md.modid
+    WHERE md.cid = ?;
+    `;
+
+    db.query(sql, [classId], (err, data) => {
+        if (err) {
+            // Handle the error
+            console.error(err);
+            res.status(500).send("An error occurred while fetching data.");
+        } else {
+            // Process the query result in 'data' and send a response
+            res.json(data);
+        }
+    });
+});
 
 // const multer = require('multer');
 // const path = require('path');

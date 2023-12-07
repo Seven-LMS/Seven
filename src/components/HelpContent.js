@@ -1,5 +1,3 @@
-// lechelpcontent.js
-
 import React from "react";
 
 function HelpContent() {

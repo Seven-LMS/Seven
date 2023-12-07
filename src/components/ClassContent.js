@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSquareCheck, faPen } from '@fortawesome/free-solid-svg-icons';
+import { faSquareCheck, faPen, faCaretRight } from '@fortawesome/free-solid-svg-icons';
 import axios from "axios";
 import "../style/style.css";
 
@@ -11,6 +11,8 @@ function ClassContent({classId}) {
     const [assignment, setAssignments] = useState([]);
     const [material, setMaterials] = useState([]);
     const [expandedAllAnnouncements, setExpandedAllAnnouncements] = useState(false);
+    const storedUserType = sessionStorage.getItem('userType');
+    const [userType, setUserType] = useState(storedUserType);
 
     useEffect(() => {
         axios.get('http://localhost:3005/getCourseAnnouncement/' + classId)
@@ -89,44 +91,44 @@ function ClassContent({classId}) {
                 </div>
             </div>
 
-            <div class="buttonholder" style={{display: 'flex', width: '100%'}}>
+            {userType == 'lecturer' && (<div class="buttonholder" style={{display: 'flex', width: '100%'}}>
                 <div class="addbutton">
-                    <a href="addmodule.html" class="addmodule">
+                    <a href= "/AddModulePage" class="addmodule">
                      <i class="fa-solid fa-pen"><FontAwesomeIcon icon={faPen} /></i>
                         <span class="text">Add module</span>
                     </a>
                 </div>
                 <div class="addbutton">
-                    <a href="add_announcement.html" class="addannouncement">
+                    <a href="/AddAnnouncementPage" class="addannouncement">
                         <i class="fa-solid fa-pen"><FontAwesomeIcon icon={faPen} /></i>
                         <span class="text">Add announcement</span>
                     </a>
                 </div>
                 <div class="addbutton">
-                    <a href="/GradePage" class="lectgrade">
+                    <a href={"/GradePage?classId="+classId} class="lectgrade">
                      <i class="fa-solid fa-pen"><FontAwesomeIcon icon={faPen} /></i>
                         <span class="text">Grade Assignment</span>
                     </a>
                 </div>
-            </div>
+            </div>)}
 
             <ul className="modulelist">
                 {modules.map((module) => (
                     <li className="modules" key={module.modid}>
                         <div class="module_button" style={{ display: 'flex', justifyContent:'end' }}>
-                            <div class="editbutton">
+                            {userType == 'lecturer' && (<div class="editbutton">
                                 <a href="ind_moduleedit.html" class="edit">
                                     <i class="fa-solid fa-pen"><FontAwesomeIcon icon={faPen} /></i>
                                     <span class="text">Edit</span>
                                 </a>
-                            </div>
+                            </div>)}
                         </div>
                         <div className="module-head">
                             <input type="checkbox" id={`module${module.modid}`} />
                             <label htmlFor={`module${module.modid}`}>
                                 <span>{module.name}</span>
                                 <div className="icon">
-                                    <FontAwesomeIcon icon={faSquareCheck} />
+                                    <FontAwesomeIcon icon={faCaretRight} />
                                 </div>
                             </label>
                             <div className="module-content">
@@ -140,7 +142,7 @@ function ClassContent({classId}) {
                                                 <label htmlFor={`mat${material.matid}`}>
                                                     <span>{material.name}</span>
                                                     <div className="icon">
-                                                        <FontAwesomeIcon icon={faSquareCheck} />
+                                                        <FontAwesomeIcon icon={faCaretRight} />
                                                     </div>
                                                 </label>
                                                 <div className="module-content">
@@ -162,7 +164,7 @@ function ClassContent({classId}) {
                                                 <label htmlFor={`ass${assignment.assid}`}>
                                                     <span>{assignment.name}</span>
                                                     <div className="icon">
-                                                        <FontAwesomeIcon icon={faSquareCheck} />
+                                                        <FontAwesomeIcon icon={faCaretRight} />
                                                     </div>
                                                 </label>
                                                 <div className="module-content">

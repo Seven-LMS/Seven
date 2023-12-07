@@ -3,54 +3,7 @@
 import React from "react";
 
 function StdGrade() {
-    const gradeStyle = {
-        width: "75%",
-    };
-
-    const gradeheadStyle = {
-        display: "flex",
-        justifyContent: "space-between",
-        border: "2px solid #333366",
-        borderBottom: "none",
-        padding: "10px 10px 10px 10px",
-        fontWeight: 500,
-        fontSize: 13,
-    };
-
-    const gradelistStyle = {
-        display: "flex",
-        flexDirection: "column",
-        padding: "10px 10px 0px 10px",
-    };
-
-    const taskscoreStyle = {
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        marginBottom: 10,
-        fontSize: 12,
-    };
-
-    const width20PercentStyle = {
-        width: "20%",
-        textAlign: "center",
-    };
-
-    const width60PercentStyle = {
-        width: "60%",
-    };
-
-    const totalsFinalgradeStyle = {
-        display: "flex",
-        justifyContent: "space-between",
-        padding: "10px 12px",
-    };
-
-    const totalsStyle = {
-        marginBottom: 5,
-        borderBottom: "2px solid #333366",
-    };
-
+    
     return (
         <div className="content">
             <div className="title">
@@ -116,6 +69,54 @@ function StdGrade() {
             </div>
         </div>
     );
+    const gradeStyle = {
+        width: "75%",
+    };
+
+    const gradeheadStyle = {
+        display: "flex",
+        justifyContent: "space-between",
+        border: "2px solid #333366",
+        borderBottom: "none",
+        padding: "10px 10px 10px 10px",
+        fontWeight: 500,
+        fontSize: 13,
+    };
+
+    const gradelistStyle = {
+        display: "flex",
+        flexDirection: "column",
+        padding: "10px 10px 0px 10px",
+    };
+
+    const taskscoreStyle = {
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        marginBottom: 10,
+        fontSize: 12,
+    };
+
+    const width20PercentStyle = {
+        width: "20%",
+        textAlign: "center",
+    };
+
+    const width60PercentStyle = {
+        width: "60%",
+    };
+
+    const totalsFinalgradeStyle = {
+        display: "flex",
+        justifyContent: "space-between",
+        padding: "10px 12px",
+    };
+
+    const totalsStyle = {
+        marginBottom: 5,
+        borderBottom: "2px solid #333366",
+    };
+
 }
 
 export default StdGrade;

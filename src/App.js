@@ -16,6 +16,11 @@ import ClassPage from './page/ClassPage';
 import Login from './page/login'
 import ProfilePage from './page/ProfilePage';
 import GradePage from './page/GradePage';
+import HelpPage from './page/HelpPage';
+import AddMaterialPage from './page/AddMaterialPage';
+import AddAssignmentPage from './page/AddAssignmentPage';
+import AddAnnouncementPage from './page/AddAnnouncementPage';
+import AddModulePage from './page/AddModulePage';
 
 function App() {
   return (
@@ -32,6 +37,11 @@ function App() {
           <Route path='/LoginPage' element={<Login/>} />
           <Route path='/ProfilePage' element={<ProfilePage/>} />
           <Route path='/GradePage' element={<GradePage/>}/>
+          <Route path='/HelpPage' element={<HelpPage/>}/>
+          <Route path='/AddAnnouncementPage' element={<AddAnnouncementPage/>}/>
+          <Route path='/AddAssignmentPage' element={<AddAssignmentPage/>}/>
+          <Route path='/AddMaterialPage' element={<AddMaterialPage/>}/>
+          <Route path='/AddModulePage' element={<AddModulePage/>}/>
         </Routes>
       </BrowserRouter>
     </div>

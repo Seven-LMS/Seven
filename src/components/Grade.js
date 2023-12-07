@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../style/gradestyle.css";
+import "../style/style.css";
 
-function Grade() {
+function Grade({classId}) {
   const [students, setStudents] = useState([]);
+  const [assignments, setAssignments] = useState([]);
+  const [selectedAssignment, setSelectedAssignment] = useState(null);
 
   useEffect(() => {
     // Fetch student data from the backend endpoint
@@ -23,12 +26,23 @@ function Grade() {
     console.log("Grades saved:", students);
   };
 
+  const handleAssignmentChange = (event) => {
+    const selectedValue = event.target.value;
+    const selectedAssignment = assignments.find(assignment => assignment.id === selectedValue);
+    setSelectedAssignment(selectedAssignment);
+  };
+
   return (
     <div className="title">
       <h2>Classname</h2>
 
-      <label htmlFor="assignment" style={{ fontSize: "14px" }}>Select Assignment:</label>
-      <select id="assignment"></select>
+      <label htmlFor="assignment" style={{ fontSize: '14px' }}>Select Assignment:</label>
+      <select id="assignment" onChange={handleAssignmentChange}>
+        <option value="" disabled selected>Select an assignment</option>
+        {assignments.map(assignment => (
+          <option key={assignment.id} value={assignment.id}>{assignment.name}</option>
+        ))}
+      </select>
 
       <table>
         <thead>
